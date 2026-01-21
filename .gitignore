@@ -33,3 +33,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+site-web-amigos-sa.json
+github-actions-key.json
+*-key.json
+*.json.key
+*-sa.json
