@@ -39,63 +39,115 @@ gcloud services enable containerregistry.googleapis.com
 gcloud services enable artifactregistry.googleapis.com
 ```
 
-### 3. Criar Service Account
+### 3. Criar Service Account e Configurar Permissões
 
 ```bash
-# Criar service account
-gcloud iam service-accounts create github-actions \
-    --display-name="GitHub Actions Service Account"
+# Se a service account já existe, pule para as permissões
+# Caso contrário, criar service account:
+# gcloud iam service-accounts create site-web-amigos-sa \
+#     --display-name="GitHub Actions Service Account"
 
-# Obter email da service account
-SA_EMAIL=$(gcloud iam service-accounts list \
-    --filter="displayName:GitHub Actions Service Account" \
-    --format="value(email)")
+# Definir variável com o email da service account
+SA_EMAIL="site-web-amigos-sa@sites-web-amigos.iam.gserviceaccount.com"
+PROJECT_ID="sites-web-amigos"
 
 # Conceder permissões necessárias
-gcloud projects add-iam-policy-binding TRIARQUIDE_PROJECT_ID \
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
     --member="serviceAccount:${SA_EMAIL}" \
     --role="roles/run.admin"
 
-gcloud projects add-iam-policy-binding TRIARQUIDE_PROJECT_ID \
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
     --member="serviceAccount:${SA_EMAIL}" \
     --role="roles/storage.admin"
 
-gcloud projects add-iam-policy-binding TRIARQUIDE_PROJECT_ID \
-    --role="roles/iam.serviceAccountUser" \
-    --member="serviceAccount:${SA_EMAIL}"
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+    --member="serviceAccount:${SA_EMAIL}" \
+    --role="roles/iam.serviceAccountUser"
 
-# Criar e baixar chave JSON
-gcloud iam service-accounts keys create github-actions-key.json \
-    --iam-account=${SA_EMAIL}
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+    --member="serviceAccount:${SA_EMAIL}" \
+    --role="roles/artifactregistry.writer"
 ```
 
-### 4. Configurar Secrets no GitHub
+### 4. Configurar Workload Identity Federation (Recomendado - Mais Seguro)
+
+Workload Identity Federation permite autenticação sem chaves JSON, usando tokens OIDC.
+
+```bash
+# Definir variáveis
+PROJECT_ID="sites-web-amigos"
+PROJECT_NUMBER=$(gcloud projects describe ${PROJECT_ID} --format="value(projectNumber)")
+SA_EMAIL="site-web-amigos-sa@sites-web-amigos.iam.gserviceaccount.com"
+GITHUB_REPO="geraldopapajr/triarquide"  # ⚠️ Ajuste para seu repositório GitHub (usuario/repositorio)
+
+# Criar Workload Identity Pool (se já existe, vai dar erro mas não tem problema)
+gcloud iam workload-identity-pools create github-pool \
+    --project=${PROJECT_ID} \
+    --location="global" \
+    --display-name="GitHub Actions Pool" 2>/dev/null || echo "Pool já existe, continuando..."
+
+# Tentar deletar provider se existir (para recriar)
+gcloud iam workload-identity-pools providers delete github-provider \
+    --project=${PROJECT_ID} \
+    --location="global" \
+    --workload-identity-pool="github-pool" 2>/dev/null || echo "Provider não existe, criando novo..."
+
+# Criar Workload Identity Provider com sintaxe correta
+gcloud iam workload-identity-pools providers create-oidc github-provider \
+    --project=${PROJECT_ID} \
+    --location="global" \
+    --workload-identity-pool="github-pool" \
+    --display-name="GitHub Provider" \
+    --issuer-uri="https://token.actions.githubusercontent.com" \
+    --attribute-mapping="google.subject=assertion.sub,attribute.actor=assertion.actor,attribute.repository=assertion.repository,attribute.repository_owner=assertion.repository_owner"
+
+# Obter o nome completo do provider
+WIF_PROVIDER=$(gcloud iam workload-identity-pools providers describe github-provider \
+    --project=${PROJECT_ID} \
+    --location="global" \
+    --workload-identity-pool="github-pool" \
+    --format="value(name)")
+
+echo "✅ WIF_PROVIDER: ${WIF_PROVIDER}"
+echo ""
+echo "⚠️  IMPORTANTE: Copie o valor acima e adicione como secret WIF_PROVIDER no GitHub"
+
+# Permitir que o repositório GitHub específico use a service account
+gcloud iam service-accounts add-iam-policy-binding ${SA_EMAIL} \
+    --project=${PROJECT_ID} \
+    --role="roles/iam.workloadIdentityUser" \
+    --member="principalSet://iam.googleapis.com/projects/${PROJECT_NUMBER}/locations/global/workloadIdentityPools/github-pool/attribute.repository/${GITHUB_REPO}"
+
+echo ""
+echo "✅ Configuração concluída!"
+echo "📝 Próximo passo: Configure os secrets no GitHub (veja seção 5)"
+```
+
+### 5. Configurar Secrets no GitHub
 
 1. Acesse seu repositório no GitHub
 2. Vá em **Settings** > **Secrets and variables** > **Actions**
 3. Clique em **New repository secret** e adicione:
 
-   - **GCP_PROJECT_ID**: ID do seu projeto GCP (ex: `triarquide-123456`)
-   - **GCP_SA_KEY**: Conteúdo completo do arquivo `github-actions-key.json` criado no passo anterior
-   - **GCP_REGION**: Região onde o Cloud Run será deployado (ex: `us-central1`, `southamerica-east1`)
+   - **GCP_PROJECT_ID**: ID do seu projeto GCP (ex: `sites-web-amigos`)
+   - **GCP_REGION**: Região onde o Cloud Run será deployado (ex: `southamerica-east1`)
+   - **WIF_PROVIDER**: O valor completo do provider (obtido no passo anterior, algo como `projects/123456789/locations/global/workloadIdentityPools/github-pool/providers/github-provider`)
+   - **WIF_SERVICE_ACCOUNT**: Email completo da service account (ex: `site-web-amigos-sa@sites-web-amigos.iam.gserviceaccount.com`)
 
-### 5. Configurar Variáveis (Opcional)
+### 6. Criar Repositório no Artifact Registry
 
-Se quiser usar Artifact Registry ao invés de Container Registry, você pode:
-
-1. Criar um repositório no Artifact Registry:
 ```bash
+PROJECT_ID="sites-web-amigos"
+REGION="southamerica-east1"  # Ajuste conforme sua região
+
 gcloud artifacts repositories create triarquide-repo \
     --repository-format=docker \
-    --location=us-central1 \
-    --description="Docker repository for Triarquide"
+    --location=${REGION} \
+    --description="Docker repository for Triarquide" \
+    --project=${PROJECT_ID}
 ```
 
-2. Atualizar o workflow para usar Artifact Registry:
-   - Alterar `IMAGE_NAME` de `gcr.io` para `us-central1-docker.pkg.dev`
-   - Atualizar permissões da service account para incluir `roles/artifactregistry.writer`
-
-### 6. Fazer Deploy
+### 7. Fazer Deploy
 
 O deploy acontecerá automaticamente quando você fizer push para a branch `main`, ou você pode acionar manualmente em **Actions** > **Deploy to Cloud Run** > **Run workflow**.
 
@@ -127,7 +179,9 @@ Para este projeto, é muito provável que fique dentro do tier gratuito.
 
 ### Erro: "Permission denied"
 - Verifique se todas as permissões foram concedidas à service account
-- Verifique se a chave JSON está correta no GitHub secret
+- Verifique se o Workload Identity Provider está configurado corretamente
+- Verifique se os secrets `WIF_PROVIDER` e `WIF_SERVICE_ACCOUNT` estão corretos no GitHub
+- Verifique se o repositório GitHub no binding do IAM está correto (formato: `usuario/repositorio`)
 
 ### Erro: "API not enabled"
 - Execute: `gcloud services enable run.googleapis.com containerregistry.googleapis.com`
