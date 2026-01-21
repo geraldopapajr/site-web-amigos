@@ -25,6 +25,34 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Validate secrets (debug)
+        run: |
+          echo "Checking secrets..."
+          if [ -z "${{ secrets.WIF_PROVIDER }}" ]; then
+            echo "❌ ERROR: WIF_PROVIDER secret is empty or not set"
+            exit 1
+          else
+            echo "✅ WIF_PROVIDER is set (length: ${#WIF_PROVIDER})"
+          fi
+          if [ -z "${{ secrets.WIF_SERVICE_ACCOUNT }}" ]; then
+            echo "❌ ERROR: WIF_SERVICE_ACCOUNT secret is empty or not set"
+            exit 1
+          else
+            echo "✅ WIF_SERVICE_ACCOUNT is set"
+          fi
+          if [ -z "${{ secrets.GCP_PROJECT_ID }}" ]; then
+            echo "❌ ERROR: GCP_PROJECT_ID secret is empty or not set"
+            exit 1
+          else
+            echo "✅ GCP_PROJECT_ID is set"
+          fi
+          if [ -z "${{ secrets.GCP_REGION }}" ]; then
+            echo "❌ ERROR: GCP_REGION secret is empty or not set"
+            exit 1
+          else
+            echo "✅ GCP_REGION is set"
+          fi
+
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:

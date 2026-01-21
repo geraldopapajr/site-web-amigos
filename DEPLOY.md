@@ -28,15 +28,52 @@ gcloud config set project TRIARQUIDE_PROJECT_ID
 
 ### 2. Habilitar APIs Necessárias
 
+**⚠️ IMPORTANTE**: Antes de criar o Workload Identity Pool e Provider, você DEVE habilitar todas estas APIs. O erro "The attribute condition must reference one of the provider's claims" geralmente ocorre quando essas APIs não estão habilitadas.
+
 ```bash
-# Habilitar Cloud Run API
-gcloud services enable run.googleapis.com
+PROJECT_ID="sites-web-amigos"
 
-# Habilitar Container Registry API (para armazenar imagens Docker)
-gcloud services enable containerregistry.googleapis.com
+# APIs essenciais para Workload Identity Federation
+gcloud services enable iam.googleapis.com \
+    --project=${PROJECT_ID}
 
-# Ou usar Artifact Registry (recomendado, mais moderno)
-gcloud services enable artifactregistry.googleapis.com
+gcloud services enable iamcredentials.googleapis.com \
+    --project=${PROJECT_ID}
+
+gcloud services enable sts.googleapis.com \
+    --project=${PROJECT_ID}
+
+gcloud services enable cloudresourcemanager.googleapis.com \
+    --project=${PROJECT_ID}
+
+# APIs para Cloud Run e Artifact Registry
+gcloud services enable run.googleapis.com \
+    --project=${PROJECT_ID}
+
+gcloud services enable artifactregistry.googleapis.com \
+    --project=${PROJECT_ID}
+```
+
+Ou habilite todas de uma vez:
+
+```bash
+PROJECT_ID="sites-web-amigos"
+
+gcloud services enable \
+    iam.googleapis.com \
+    iamcredentials.googleapis.com \
+    sts.googleapis.com \
+    cloudresourcemanager.googleapis.com \
+    run.googleapis.com \
+    artifactregistry.googleapis.com \
+    --project=${PROJECT_ID}
+```
+
+**Verificar APIs habilitadas:**
+
+```bash
+gcloud services list --enabled --project=${PROJECT_ID} \
+    --filter="name:iam.googleapis.com OR name:iamcredentials.googleapis.com OR name:sts.googleapis.com OR name:cloudresourcemanager.googleapis.com OR name:run.googleapis.com OR name:artifactregistry.googleapis.com"
 ```
 
 ### 3. Criar Service Account e Configurar Permissões
@@ -73,33 +110,59 @@ gcloud projects add-iam-policy-binding ${PROJECT_ID} \
 
 Workload Identity Federation permite autenticação sem chaves JSON, usando tokens OIDC.
 
+**⚠️ IMPORTANTE**: Certifique-se de que todas as APIs da seção 2 estão habilitadas antes de prosseguir!
+
+#### Opção A: Usar Script Automatizado (Recomendado)
+
+Execute o script completo que verifica e habilita tudo automaticamente:
+
+```bash
+bash setup-wif-completo.sh
+```
+
+Este script:
+- ✅ Verifica e habilita todas as APIs necessárias
+- ✅ Verifica permissões do usuário
+- ✅ Cria o Workload Identity Pool
+- ✅ Cria o OIDC Provider corretamente
+- ✅ Obtém o WIF_PROVIDER
+- ✅ Configura permissões da Service Account
+
+#### Opção B: Configuração Manual
+
+Se preferir fazer manualmente:
+
 ```bash
 # Definir variáveis
 PROJECT_ID="sites-web-amigos"
 PROJECT_NUMBER=$(gcloud projects describe ${PROJECT_ID} --format="value(projectNumber)")
 SA_EMAIL="site-web-amigos-sa@sites-web-amigos.iam.gserviceaccount.com"
-GITHUB_REPO="geraldopapajr/triarquide"  # ⚠️ Ajuste para seu repositório GitHub (usuario/repositorio)
+GITHUB_REPO="geraldopapajr/site-web-amigos"  # ⚠️ Ajuste para seu repositório GitHub
+GITHUB_ORG="geraldopapajr"
 
-# Criar Workload Identity Pool (se já existe, vai dar erro mas não tem problema)
+# Criar Workload Identity Pool
 gcloud iam workload-identity-pools create github-pool \
     --project=${PROJECT_ID} \
     --location="global" \
-    --display-name="GitHub Actions Pool" 2>/dev/null || echo "Pool já existe, continuando..."
+    --display-name="GitHub Actions Pool"
 
-# Tentar deletar provider se existir (para recriar)
-gcloud iam workload-identity-pools providers delete github-provider \
-    --project=${PROJECT_ID} \
-    --location="global" \
-    --workload-identity-pool="github-pool" 2>/dev/null || echo "Provider não existe, criando novo..."
-
-# Criar Workload Identity Provider com sintaxe correta
+# Criar Workload Identity Provider
+# Tentar com attribute-condition primeiro (mais seguro)
 gcloud iam workload-identity-pools providers create-oidc github-provider \
     --project=${PROJECT_ID} \
     --location="global" \
     --workload-identity-pool="github-pool" \
     --display-name="GitHub Provider" \
     --issuer-uri="https://token.actions.githubusercontent.com" \
-    --attribute-mapping="google.subject=assertion.sub,attribute.actor=assertion.actor,attribute.repository=assertion.repository,attribute.repository_owner=assertion.repository_owner"
+    --attribute-mapping="google.subject=assertion.sub,attribute.repository=assertion.repository,attribute.repository_owner=assertion.repository_owner" \
+    --attribute-condition="assertion.repository_owner=='${GITHUB_ORG}'" || \
+gcloud iam workload-identity-pools providers create-oidc github-provider \
+    --project=${PROJECT_ID} \
+    --location="global" \
+    --workload-identity-pool="github-pool" \
+    --display-name="GitHub Provider" \
+    --issuer-uri="https://token.actions.githubusercontent.com" \
+    --attribute-mapping="google.subject=assertion.sub"
 
 # Obter o nome completo do provider
 WIF_PROVIDER=$(gcloud iam workload-identity-pools providers describe github-provider \
