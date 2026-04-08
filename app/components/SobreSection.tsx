@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function SobreSection() {
   return (
     <section id="sobre" className="relative py-28 lg:py-36 bg-gradient-to-b from-cream via-cream-light to-white">
@@ -18,13 +20,16 @@ export default function SobreSection() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start mb-16">
             <div className="relative group mx-auto w-full max-w-md lg:max-w-none">
-              <div className="relative aspect-[4/5] max-h-[480px] rounded-2xl overflow-hidden shadow-soft bg-gradient-to-br from-bronze/20 via-cream-light to-bronze/10 ring-1 ring-bronze/15 flex flex-col items-center justify-center p-10 text-center">
-                <span className="font-display text-6xl text-bronze/30 mb-4" aria-hidden>
-                  FZ
-                </span>
-                <p className="text-graphite-light text-sm font-sans leading-relaxed max-w-xs">
-                  Espaço reservado para foto profissional.
-                </p>
+              <div className="relative aspect-[4/5] max-h-[480px] rounded-2xl overflow-hidden shadow-soft ring-1 ring-bronze/15 bg-cream-dark">
+                <Image
+                  src="/fernanda-zanatelli.jpeg"
+                  alt="Fernanda Zanatelli, nutricionista"
+                  fill
+                  className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  priority
+                />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-bronze/10 via-transparent to-transparent" />
               </div>
               <div className="absolute -bottom-3 -right-3 w-full h-full border-2 border-bronze/15 rounded-2xl -z-10 group-hover:border-bronze/25 transition-colors" />
             </div>
