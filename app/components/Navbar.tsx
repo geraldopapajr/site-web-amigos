@@ -1,15 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const navItems = [
-  { href: "#projetos", label: "Projetos" },
-  { href: "#sobre", label: "Sobre" },
-  { href: "#contato", label: "Contato" },
-];
+const sections = [
+  { id: "servicos", label: "Serviços" },
+  { id: "sobre", label: "Sobre" },
+  { id: "depoimentos", label: "Depoimentos" },
+  { id: "contato", label: "Contato" },
+] as const;
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -17,15 +17,14 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["projetos", "sobre", "contato"];
       const scrollPosition = window.scrollY + 120;
 
-      for (const section of sections) {
-        const element = document.getElementById(section);
+      for (const { id } of sections) {
+        const element = document.getElementById(id);
         if (element) {
           const { offsetTop, offsetHeight } = element;
           if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(`#${section}`);
+            setActiveSection(id);
             break;
           }
         }
@@ -33,27 +32,31 @@ export default function Navbar() {
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Check on mount
+    handleScroll();
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    const targetId = href.replace("#", "");
-    const element = document.getElementById(targetId);
+  const scrollToId = (id: string) => {
+    const element = document.getElementById(id);
     if (element) {
-      const offsetTop = element.offsetTop - 80; // Account for navbar height
       window.scrollTo({
-        top: offsetTop,
+        top: element.offsetTop - 80,
         behavior: "smooth",
       });
     }
   };
 
+  const handleSectionClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    if (pathname === "/") {
+      e.preventDefault();
+      scrollToId(id);
+    }
+  };
+
   return (
     <nav
-      className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-b border-bronze/30 shadow-sm"
+      className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-b border-bronze/20 shadow-sm"
       role="navigation"
       aria-label="Navegação principal"
     >
@@ -62,39 +65,42 @@ export default function Navbar() {
           <Link
             href="/"
             onClick={(e) => {
-              e.preventDefault();
-              window.scrollTo({ top: 0, behavior: "smooth" });
+              if (pathname === "/") {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
             }}
-            className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+            className="flex items-center gap-3 hover:opacity-85 transition-opacity"
             aria-label="Ir para página inicial"
           >
-            <div className="relative w-12 h-12 lg:w-14 lg:h-14">
-              <Image
-                src="/hero-image.jpg.png"
-                alt="Logo Triarquide"
-                fill
-                className="object-contain"
-                sizes="56px"
-                priority
-                quality={90}
-              />
-            </div>
-            <span className="text-xl lg:text-2xl font-display font-semibold text-graphite hidden sm:block">
-              Triarquide
+            <span
+              className="flex h-11 w-11 lg:h-12 lg:w-12 shrink-0 items-center justify-center rounded-full bg-bronze/12 text-lg font-display font-semibold text-bronze-dark"
+              aria-hidden
+            >
+              FZ
+            </span>
+            <span className="flex flex-col leading-tight">
+              <span className="text-lg lg:text-xl font-display font-semibold text-graphite">
+                Fernanda Zanatelli
+              </span>
+              <span className="text-xs font-sans font-medium uppercase tracking-wider text-bronze-dark/90">
+                Nutricionista
+              </span>
             </span>
           </Link>
-          <ul className="flex space-x-6 lg:space-x-10" role="list">
-            {navItems.map((item) => {
-              const isActive = activeSection === item.href || (pathname === "/" && activeSection === item.href);
+          <ul className="flex flex-wrap justify-end gap-x-4 gap-y-2 lg:gap-x-8" role="list">
+            {sections.map((item) => {
+              const isActive = pathname === "/" && activeSection === item.id;
+              const href = pathname === "/" ? `#${item.id}` : `/#${item.id}`;
               return (
-                <li key={item.href}>
+                <li key={item.id}>
                   <Link
-                    href={item.href}
-                    onClick={(e) => handleClick(e, item.href)}
-                    className={`text-base lg:text-lg font-medium transition-all duration-300 ${
+                    href={href}
+                    onClick={(e) => handleSectionClick(e, item.id)}
+                    className={`text-sm lg:text-base font-medium transition-all duration-300 ${
                       isActive
-                        ? "text-graphite border-b-2 border-bronze pb-1.5 font-semibold"
-                        : "text-graphite/80 hover:text-bronze hover:border-b-2 hover:border-bronze/30 pb-1.5"
+                        ? "text-graphite border-b-2 border-bronze pb-1 font-semibold"
+                        : "text-graphite/80 hover:text-bronze hover:border-b-2 hover:border-bronze/30 pb-1"
                     }`}
                     aria-current={isActive ? "page" : undefined}
                   >

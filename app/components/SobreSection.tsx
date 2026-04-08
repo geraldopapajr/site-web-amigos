@@ -1,113 +1,100 @@
-import Image from "next/image";
-
 export default function SobreSection() {
   return (
-    <section id="sobre" className="relative py-32 lg:py-40 bg-gradient-to-b from-white via-cream-light to-white">
-      {/* Separador decorativo superior */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-bronze/30 to-transparent"></div>
-      
+    <section id="sobre" className="relative py-28 lg:py-36 bg-gradient-to-b from-cream via-cream-light to-white">
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-bronze/25 to-transparent" />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
-          {/* Header da seção */}
-          <div className="text-center mb-20">
-            <div className="inline-block mb-4">
-              <span className="text-sm font-sans font-semibold text-bronze-dark uppercase tracking-wider">
-                Nossa História
-              </span>
-            </div>
-            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold text-graphite mb-6">
-              Sobre
+          <div className="text-center mb-16">
+            <span className="text-sm font-sans font-semibold text-bronze-dark uppercase tracking-wider">
+              Quem cuida de você
+            </span>
+            <h2 className="mt-3 text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-graphite mb-6">
+              Sobre mim
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-bronze to-bronze-light mx-auto mb-8"></div>
+            <div className="w-24 h-1 bg-gradient-to-r from-bronze to-bronze-light mx-auto mb-4" />
+            <p className="text-bronze-dark font-sans font-medium">CRN-X XXXXX · Nutricionista</p>
           </div>
 
-          {/* Foto do arquiteto e texto */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-20">
-            {/* Foto do arquiteto */}
-            <div className="order-2 lg:order-1 relative group">
-              <div className="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-soft">
-                <div className="absolute inset-0 bg-gradient-to-br from-bronze/10 to-transparent z-10"></div>
-                <Image
-                  src="/arquiteto.png"
-                  alt="Arquiteto - Triarquide"
-                  fill
-                  className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  quality={90}
-                />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start mb-16">
+            <div className="relative group mx-auto w-full max-w-md lg:max-w-none">
+              <div className="relative aspect-[4/5] max-h-[480px] rounded-2xl overflow-hidden shadow-soft bg-gradient-to-br from-bronze/20 via-cream-light to-bronze/10 ring-1 ring-bronze/15 flex flex-col items-center justify-center p-10 text-center">
+                <span className="font-display text-6xl text-bronze/30 mb-4" aria-hidden>
+                  FZ
+                </span>
+                <p className="text-graphite-light text-sm font-sans leading-relaxed max-w-xs">
+                  Espaço reservado para foto profissional.
+                </p>
               </div>
-              {/* Decoração ao redor da foto */}
-              <div className="absolute -bottom-4 -right-4 w-full h-full border-2 border-bronze/20 rounded-2xl -z-10 group-hover:border-bronze/40 transition-colors duration-300"></div>
+              <div className="absolute -bottom-3 -right-3 w-full h-full border-2 border-bronze/15 rounded-2xl -z-10 group-hover:border-bronze/25 transition-colors" />
             </div>
 
-            {/* Texto */}
-            <div className="order-1 lg:order-2 space-y-6 text-lg text-graphite-light font-sans leading-relaxed flex flex-col justify-center">
+            <div className="space-y-6 text-lg text-graphite-light font-sans leading-relaxed flex flex-col justify-center">
               <p>
-                A Triarquide nasceu da paixão por criar espaços arquitetônicos que transcendem o convencional,
-                combinando estética contemporânea com princípios de sustentabilidade e responsabilidade ambiental.
-                Nossa equipe de arquitetos e designers trabalha com dedicação para transformar visões em realidade,
-                sempre considerando o impacto positivo que um bom projeto pode ter na vida das pessoas e no meio ambiente.
+                Sou a <strong className="text-graphite font-semibold">Fernanda Zanatelli</strong>, nutricionista com foco em
+                atendimento individualizado. Acredito que alimentação saudável precisa ser possível no mundo real — com
+                trabalho, família e imprevistos — e não apenas em teorias irreais.
               </p>
-
               <p>
-                Com anos de experiência no mercado, desenvolvemos projetos residenciais, comerciais e institucionais
-                que se destacam pela qualidade do design, pela atenção aos detalhes e pelo compromisso com a excelência.
-                Acreditamos que a arquitetura deve ser acessível, funcional e, ao mesmo tempo, inspiradora, criando
-                ambientes que promovem o bem-estar e a qualidade de vida.
+                Minha prática combina evidências científicas com escuta ativa: entendo sua rotina, suas preferências e
+                limitações para construir um plano que você consiga seguir. O objetivo é autonomia e segurança nas
+                escolhas, não dependência de cardápios engessados.
+              </p>
+              <p>
+                Atuo com diferentes perfis — desde quem busca mais disposição e qualidade de vida até quem precisa de
+                suporte nutricional em contextos clínicos específicos, sempre em articulação com sua equipe de saúde
+                quando necessário.
               </p>
             </div>
           </div>
 
-          {/* Texto adicional em coluna única */}
-          <div className="mb-20">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-              <div className="space-y-6 text-lg text-graphite-light font-sans leading-relaxed">
-                <p>
-                  Nossa metodologia de trabalho é baseada em um processo colaborativo, onde ouvimos atentamente as
-                  necessidades e desejos de nossos clientes, traduzindo-os em soluções arquitetônicas inovadoras e
-                  sustentáveis. Utilizamos tecnologias de ponta e materiais de alta qualidade, sempre priorizando
-                  práticas construtivas que minimizam o impacto ambiental e maximizam a eficiência energética dos
-                  edifícios.
-                </p>
-              </div>
-
-              <div className="space-y-6 text-lg text-graphite-light font-sans leading-relaxed">
-                <p>
-                  Além disso, mantemos um compromisso constante com a inovação e o aprendizado contínuo, acompanhando
-                  as tendências do mercado e as melhores práticas da arquitetura contemporânea internacional. Isso nos
-                  permite oferecer soluções que estão sempre à frente do seu tempo, incorporando conceitos modernos de
-                  design, tecnologia e sustentabilidade em cada projeto que desenvolvemos.
-                </p>
-              </div>
-            </div>
+          <div className="mb-16">
+            <h3 className="text-center text-xl font-display font-semibold text-graphite mb-8">Áreas de atuação</h3>
+            <ul className="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
+              {[
+                "Nutrição clínica",
+                "Emagrecimento sustentável",
+                "Hábitos e comportamento alimentar",
+                "Nutrição na vida adulta",
+                "Planejamento alimentar prático",
+              ].map((tag) => (
+                <li
+                  key={tag}
+                  className="px-4 py-2 rounded-full bg-white border border-bronze/15 text-graphite text-sm font-medium shadow-sm"
+                >
+                  {tag}
+                </li>
+              ))}
+            </ul>
           </div>
 
-          {/* Estatísticas */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="group bg-gradient-to-br from-white to-cream-light rounded-2xl p-8 text-center border border-bronze/10 hover:border-bronze/30 transition-all duration-300 hover:shadow-bronze hover:-translate-y-1">
-              <div className="text-5xl lg:text-6xl font-display font-bold bg-gradient-to-br from-bronze to-bronze-dark bg-clip-text text-transparent mb-3 group-hover:scale-110 transition-transform duration-300">
-                15+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-white rounded-2xl p-8 text-center border border-bronze/10 hover:shadow-soft transition-shadow">
+              <div className="text-4xl lg:text-5xl font-display font-bold bg-gradient-to-br from-bronze to-bronze-dark bg-clip-text text-transparent mb-2">
+                100%
               </div>
-              <div className="text-graphite-light font-sans font-medium">Anos de Experiência</div>
+              <div className="text-graphite-light font-sans text-sm font-medium">Foco no paciente</div>
             </div>
-            <div className="group bg-gradient-to-br from-white to-cream-light rounded-2xl p-8 text-center border border-bronze/10 hover:border-bronze/30 transition-all duration-300 hover:shadow-bronze hover:-translate-y-1">
-              <div className="text-5xl lg:text-6xl font-display font-bold bg-gradient-to-br from-bronze to-bronze-dark bg-clip-text text-transparent mb-3 group-hover:scale-110 transition-transform duration-300">
-                200+
+            <div className="bg-white rounded-2xl p-8 text-center border border-bronze/10 hover:shadow-soft transition-shadow">
+              <div className="text-4xl lg:text-5xl font-display font-bold bg-gradient-to-br from-bronze to-bronze-dark bg-clip-text text-transparent mb-2">
+                1:1
               </div>
-              <div className="text-graphite-light font-sans font-medium">Projetos Realizados</div>
+              <div className="text-graphite-light font-sans text-sm font-medium">Consultas personalizadas</div>
             </div>
-            <div className="group bg-gradient-to-br from-white to-cream-light rounded-2xl p-8 text-center border border-bronze/10 hover:border-bronze/30 transition-all duration-300 hover:shadow-bronze hover:-translate-y-1">
-              <div className="text-5xl lg:text-6xl font-display font-bold bg-gradient-to-br from-bronze to-bronze-dark bg-clip-text text-transparent mb-3 group-hover:scale-110 transition-transform duration-300">
-                50+
+            <div className="bg-white rounded-2xl p-8 text-center border border-bronze/10 hover:shadow-soft transition-shadow">
+              <div className="text-4xl lg:text-5xl font-display font-bold bg-gradient-to-br from-bronze to-bronze-dark bg-clip-text text-transparent mb-2">
+                ∞
               </div>
-              <div className="text-graphite-light font-sans font-medium">Clientes Satisfeitos</div>
+              <div className="text-graphite-light font-sans text-sm font-medium">Suporte entre consultas*</div>
             </div>
           </div>
+          <p className="text-center text-xs text-graphite-light/90 mt-4 font-sans">
+            *Conforme combinado no plano de acompanhamento.
+          </p>
         </div>
       </div>
-      
-      {/* Separador decorativo inferior */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-bronze/30 to-transparent"></div>
+
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-bronze/25 to-transparent" />
     </section>
   );
 }

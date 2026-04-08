@@ -15,13 +15,21 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Triarquide - Arquitetura Moderna",
-  description: "Site de arquitetura moderno e minimalista",
-  keywords: ["arquitetura", "design", "projetos arquitetônicos"],
-  authors: [{ name: "Triarquide" }],
+  title: "Fernanda Zanatelli — Nutricionista",
+  description:
+    "Consultoria nutricional personalizada com base científica. Fernanda Zanatelli, nutricionista: reeducação alimentar, objetivos de saúde e acompanhamento humanizado.",
+  keywords: [
+    "nutricionista",
+    "nutrição",
+    "consulta nutricional",
+    "plano alimentar",
+    "Fernanda Zanatelli",
+  ],
+  authors: [{ name: "Fernanda Zanatelli" }],
   openGraph: {
-    title: "Triarquide - Arquitetura Moderna",
-    description: "Site de arquitetura moderno e minimalista",
+    title: "Fernanda Zanatelli — Nutricionista",
+    description:
+      "Consultoria nutricional personalizada com foco em resultados sustentáveis e bem-estar.",
     type: "website",
   },
 };

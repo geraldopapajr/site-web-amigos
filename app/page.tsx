@@ -1,8 +1,10 @@
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import ProjetosSection from "./components/ProjetosSection";
+import ServicosSection from "./components/ServicosSection";
 import SobreSection from "./components/SobreSection";
+import DepoimentosSection from "./components/DepoimentosSection";
 import ContatoSection from "./components/ContatoSection";
+import Footer from "./components/Footer";
 
 export default function Home() {
   return (
@@ -10,10 +12,12 @@ export default function Home() {
       <Navbar />
       <main className="bg-cream">
         <Hero />
-        <ProjetosSection />
+        <ServicosSection />
         <SobreSection />
+        <DepoimentosSection />
         <ContatoSection />
       </main>
+      <Footer />
     </>
   );
 }
