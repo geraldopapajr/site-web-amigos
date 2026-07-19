@@ -36,6 +36,9 @@ export const metadata: Metadata = {
     "GeraTech",
   ],
   authors: [{ name: "GeraTech" }],
+  icons: {
+    icon: "/favicon.svg",
+  },
   openGraph: {
     title: "GeraTech — Gerando tecnologia para seu negócio",
     description:
