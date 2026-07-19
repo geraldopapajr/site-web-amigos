@@ -1,87 +1,46 @@
+import { whatsappHref, emailHref, CONTACT_EMAIL } from "../siteConfig";
+
 export default function ContatoSection() {
   return (
-    <section id="contato" className="relative py-28 lg:py-36 bg-gradient-to-b from-cream-light via-cream to-cream-dark">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-bronze/25 to-transparent" />
+    <section id="contato" className="relative overflow-hidden bg-ink py-24 lg:py-32">
+      <div
+        className="pointer-events-none absolute -top-20 left-1/2 h-[420px] w-[420px] -translate-x-1/2 glow-cyan"
+        aria-hidden
+      />
+      <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span className="font-mono text-xs font-medium uppercase tracking-[0.2em] text-cyan">
+          Vamos conversar
+        </span>
+        <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-mist text-balance">
+          Vamos gerar tecnologia{" "}
+          <span className="text-gradient">pro seu negócio?</span>
+        </h2>
+        <p className="mx-auto mt-6 max-w-xl text-lg text-mist-muted leading-relaxed text-balance">
+          Me chama no WhatsApp para um diagnóstico gratuito da sua operação. Em uma
+          conversa a gente já identifica onde os seus dados podem gerar mais margem.
+        </p>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-16">
-            <span className="text-sm font-sans font-semibold text-bronze-dark uppercase tracking-wider">
-              Próximo passo
-            </span>
-            <h2 className="mt-3 text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-graphite mb-6">
-              Contato
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-bronze to-bronze-light mx-auto mb-8" />
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
-            <div className="space-y-6 text-lg text-graphite-light font-sans leading-relaxed">
-              <p>
-                Entre em contato para saber sobre disponibilidade de horários, modalidade de atendimento (presencial ou
-                online) e valores. Respondo o mais breve possível em dias úteis.
-              </p>
-              <p>
-                Se preferir, envie uma mensagem com seus objetivos e a melhor forma de retorno — telefone, e-mail ou
-                WhatsApp. Na primeira consulta alinhamos expectativas e traçamos o plano de acompanhamento.
-              </p>
-            </div>
-
-            <div className="bg-gradient-to-br from-white to-cream-light rounded-2xl p-8 lg:p-10 border border-bronze/15 shadow-soft">
-              <h3 className="text-xl font-display font-semibold text-graphite mb-6 pb-4 border-b border-bronze/15">
-                Informações
-              </h3>
-              <div className="space-y-5 text-graphite-light font-sans">
-                <div className="flex items-start gap-3">
-                  <div className="w-1 min-h-[1.5rem] bg-gradient-to-b from-bronze to-bronze-light rounded-full shrink-0" />
-                  <div>
-                    <span className="font-semibold text-graphite block mb-1">E-mail</span>
-                    <a
-                      href="mailto:contato@fernandazanatelli.com.br"
-                      className="text-bronze-dark hover:text-bronze transition-colors"
-                    >
-                      contato@fernandazanatelli.com.br
-                    </a>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-1 min-h-[1.5rem] bg-gradient-to-b from-bronze to-bronze-light rounded-full shrink-0" />
-                  <div>
-                    <span className="font-semibold text-graphite block mb-1">WhatsApp</span>
-                    <a href="https://wa.me/5500000000000" className="text-bronze-dark hover:text-bronze transition-colors">
-                      (00) 00000-0000
-                    </a>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-1 min-h-[1.5rem] bg-gradient-to-b from-bronze to-bronze-light rounded-full shrink-0" />
-                  <div>
-                    <span className="font-semibold text-graphite block mb-1">Consultório</span>
-                    <span>
-                      Endereço completo
-                      <br />
-                      Cidade, UF
-                    </span>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-1 min-h-[1.5rem] bg-gradient-to-b from-bronze to-bronze-light rounded-full shrink-0" />
-                  <div>
-                    <span className="font-semibold text-graphite block mb-1">Horário</span>
-                    <span>Segunda a sexta, conforme agenda</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-gradient-to-r from-bronze/10 via-bronze/5 to-bronze/10 rounded-2xl p-8 lg:p-10 border border-bronze/15 text-center">
-            <p className="text-base text-graphite-light font-sans leading-relaxed max-w-3xl mx-auto">
-              Este site tem caráter informativo e não substitui consulta presencial ou remota. Cada caso é único;
-              orientações personalizadas são fornecidas apenas após avaliação profissional individualizada.
-            </p>
-          </div>
+        <div className="mt-9 flex flex-col sm:flex-row justify-center gap-4">
+          <a
+            href={whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-cyan px-8 py-3.5 text-base font-semibold text-ink shadow-glow transition hover:bg-data-green"
+          >
+            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden>
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.247-.694.247-1.289.173-1.413-.074-.124-.272-.198-.57-.347" />
+            </svg>
+            Falar no WhatsApp
+          </a>
+          <a
+            href={emailHref}
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-8 py-3.5 text-base font-semibold text-mist transition hover:border-cyan/50 hover:bg-white/10"
+          >
+            Enviar e-mail
+          </a>
         </div>
+
+        <p className="mt-6 font-mono text-sm text-mist-muted">{CONTACT_EMAIL}</p>
       </div>
     </section>
   );

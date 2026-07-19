@@ -1,111 +1,124 @@
 "use client";
 
+import { whatsappHref } from "../siteConfig";
+
 export default function Hero() {
+  const scrollToId = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      window.scrollTo({ top: element.offsetTop - 80, behavior: "smooth" });
+    }
+  };
+
   return (
-    <section className="relative min-h-screen flex flex-col lg:flex-row overflow-hidden bg-gradient-to-b from-cream via-cream-light to-cream">
-      <div className="absolute top-0 right-0 w-[28rem] h-[28rem] bg-bronze/8 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-      <div className="absolute bottom-0 left-0 w-[28rem] h-[28rem] bg-bronze/6 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+    <section
+      id="inicio"
+      className="relative overflow-hidden bg-ink pt-32 pb-20 lg:pt-40 lg:pb-28"
+    >
+      {/* Grid + glow de fundo */}
+      <div className="pointer-events-none absolute inset-0 bg-grid" aria-hidden />
+      <div
+        className="pointer-events-none absolute -top-40 left-1/2 h-[520px] w-[520px] -translate-x-1/2 glow-cyan"
+        aria-hidden
+      />
 
-      <div className="flex-1 flex flex-col lg:flex-row relative z-10 min-h-screen">
-        <div className="flex-1 flex items-center justify-center lg:justify-start px-4 sm:px-6 lg:px-12 xl:px-16 pt-24 pb-16 lg:pt-28 lg:pb-0">
-          <div className="max-w-2xl">
-            <div className="inline-block mb-6">
-              <span className="text-xs font-sans font-semibold text-bronze-dark uppercase tracking-wider bg-bronze/10 px-4 py-2 rounded-full">
-                Nutrição clínica · Base científica
-              </span>
-            </div>
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-14 lg:gap-10 items-center">
+          {/* Coluna de texto */}
+          <div>
+            <span className="inline-flex items-center gap-2 rounded-full border border-cyan/25 bg-cyan/5 px-4 py-1.5 text-xs font-mono font-medium uppercase tracking-wider text-cyan">
+              <span className="h-1.5 w-1.5 rounded-full bg-data-green" />
+              Engenharia de dados para e-commerce
+            </span>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display font-bold text-graphite leading-tight mb-4">
-              Fernanda
-              <span className="block text-bronze mt-1 bg-gradient-to-r from-bronze to-bronze-light bg-clip-text text-transparent">
-                Zanatelli
-              </span>
+            <h1 className="mt-6 text-4xl sm:text-5xl lg:text-[3.4rem] leading-[1.08] font-display font-bold text-mist text-balance">
+              Seus dados já sabem o preço certo, o estoque ideal e a promoção que vende.{" "}
+              <span className="text-gradient">Eu faço eles falarem.</span>
             </h1>
 
-            <p className="text-xl sm:text-2xl font-display text-graphite-light mb-6">
-              Nutricionista
+            <p className="mt-6 text-lg text-mist-muted font-sans leading-relaxed max-w-xl text-balance">
+              A GeraTech constrói a infraestrutura de dados que otimiza precificação,
+              estoque e promoções do seu e-commerce — do jeito que já está rodando na
+              Hub Smart Home.
             </p>
 
-            <div className="w-20 h-1 bg-gradient-to-r from-bronze to-bronze-light mb-8" />
-
-            <p className="text-lg sm:text-xl text-graphite-light font-sans leading-relaxed max-w-xl text-balance">
-              Acompanhamento nutricional personalizado para você ganhar clareza sobre o que comer,
-              atingir seus objetivos de saúde e manter hábitos sustentáveis no dia a dia.
-            </p>
-
-            <div className="mt-10 flex flex-col sm:flex-row gap-4">
+            <div className="mt-9 flex flex-col sm:flex-row gap-4">
               <a
-                href="#contato"
-                onClick={(e) => {
-                  e.preventDefault();
-                  const el = document.getElementById("contato");
-                  if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: "smooth" });
-                }}
-                className="inline-flex items-center justify-center rounded-full bg-bronze px-8 py-3.5 text-base font-semibold text-white shadow-bronze transition hover:bg-bronze-dark"
+                href={whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-full bg-cyan px-8 py-3.5 text-base font-semibold text-ink shadow-glow transition hover:bg-data-green"
               >
-                Agendar consulta
+                Falar no WhatsApp
               </a>
-              <a
-                href="#servicos"
-                onClick={(e) => {
-                  e.preventDefault();
-                  const el = document.getElementById("servicos");
-                  if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: "smooth" });
-                }}
-                className="inline-flex items-center justify-center rounded-full border-2 border-bronze/35 bg-white/80 px-8 py-3.5 text-base font-semibold text-bronze-dark transition hover:border-bronze hover:bg-cream-light"
+              <button
+                type="button"
+                onClick={() => scrollToId("case")}
+                className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-8 py-3.5 text-base font-semibold text-mist transition hover:border-cyan/50 hover:bg-white/10"
               >
-                Ver serviços
-              </a>
+                Ver o case real
+              </button>
             </div>
-          </div>
-        </div>
 
-        <div className="flex-1 relative min-h-[320px] lg:min-h-0 flex items-center justify-center p-8 lg:p-12">
-          <div className="relative w-full max-w-md aspect-square">
-            <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-bronze/15 via-cream-light to-bronze/5 ring-1 ring-bronze/15" />
-            <div className="absolute inset-6 rounded-[2rem] bg-white/70 backdrop-blur-sm shadow-soft flex flex-col items-center justify-center text-center p-8 ring-1 ring-bronze/10">
-              <svg
-                className="w-14 h-14 text-bronze/30 mb-3"
-                viewBox="0 0 48 48"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.25"
-                aria-hidden
-              >
-                <path d="M24 8c-8 12-8 20 0 28M24 8c8 12 8 20 0 28M12 20c8 4 16 4 24 0M14 28c6 3 14 3 20 0" />
-              </svg>
-              <p className="font-display text-2xl text-graphite mb-2">Alimentação com propósito</p>
-              <p className="text-sm text-graphite-light leading-relaxed">
-                Planos alinhados ao seu estilo de vida, exames e metas — sem modismos e sem culpa.
+            <p className="mt-6 text-sm font-mono text-mist-muted/80">
+              Mercado Livre · Marketplaces · Loja própria
+            </p>
+          </div>
+
+          {/* Coluna visual: painel de dados estilizado */}
+          <div className="relative">
+            <div className="pointer-events-none absolute -inset-6 glow-green" aria-hidden />
+            <div className="relative rounded-2xl border border-white/10 bg-surface/80 backdrop-blur-sm p-6 shadow-soft animate-float-slow">
+              <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                <span className="font-mono text-xs uppercase tracking-wider text-mist-muted">
+                  painel · tempo real
+                </span>
+                <span className="flex gap-1.5" aria-hidden>
+                  <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-data-green" />
+                </span>
+              </div>
+
+              {/* KPIs (ilustrativos) */}
+              <div className="grid grid-cols-3 gap-3 py-5">
+                {[
+                  { k: "Margem", v: "27,4%", up: true },
+                  { k: "Ruptura", v: "1,2%", up: false },
+                  { k: "Giro", v: "3,8×", up: true },
+                ].map((kpi) => (
+                  <div key={kpi.k} className="rounded-xl border border-white/10 bg-ink/60 p-3">
+                    <p className="font-mono text-[0.65rem] uppercase tracking-wider text-mist-muted">
+                      {kpi.k}
+                    </p>
+                    <p className="mt-1 font-mono text-lg font-semibold text-mist">{kpi.v}</p>
+                    <p
+                      className={`font-mono text-[0.65rem] ${
+                        kpi.up ? "text-data-green" : "text-cyan"
+                      }`}
+                    >
+                      {kpi.up ? "▲ otimizado" : "▼ reduzido"}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Barras */}
+              <div className="flex items-end gap-2 h-28 border-t border-white/10 pt-5">
+                {[38, 52, 44, 68, 60, 82, 74, 95].map((h, i) => (
+                  <div
+                    key={i}
+                    className="flex-1 rounded-t bg-gradient-to-t from-cyan/30 to-data-green/80"
+                    style={{ height: `${h}%` }}
+                  />
+                ))}
+              </div>
+              <p className="mt-3 font-mono text-[0.65rem] text-mist-muted">
+                {"> preco_otimo · demanda_prevista · promo_roi"}
               </p>
             </div>
           </div>
         </div>
-      </div>
-
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-cream to-transparent z-20 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-bronze/35 to-transparent z-30" />
-
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 animate-bounce">
-        <button
-          type="button"
-          onClick={() => {
-            const element = document.getElementById("servicos");
-            if (element) {
-              window.scrollTo({
-                top: element.offsetTop - 80,
-                behavior: "smooth",
-              });
-            }
-          }}
-          className="flex flex-col items-center gap-2 text-bronze/70 hover:text-bronze transition-colors bg-transparent border-none cursor-pointer"
-          aria-label="Rolar para serviços"
-        >
-          <span className="text-xs font-sans uppercase tracking-wider">Serviços</span>
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          </svg>
-        </button>
       </div>
     </section>
   );

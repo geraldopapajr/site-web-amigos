@@ -2,23 +2,25 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 export const metadata = {
-  title: "Serviços — Fernanda Zanatelli",
-  description: "Consulta nutricional, plano alimentar personalizado e acompanhamento.",
+  title: "O que faço — GeraTech",
+  description:
+    "Precificação inteligente, gestão de estoque, promoções com ROI, infraestrutura de dados, dashboards e modelos sob medida para e-commerce.",
 };
 
 export default function Servicos() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-cream pt-24 pb-16">
+      <main className="min-h-screen bg-ink pt-32 pb-16">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-display font-bold text-graphite mb-6">Serviços</h1>
-          <p className="text-graphite-light font-sans leading-relaxed text-lg mb-6">
-            Detalhes dos serviços estão na{" "}
-            <a href="/#servicos" className="text-bronze-dark font-medium hover:text-bronze underline underline-offset-2">
+          <h1 className="text-4xl font-display font-bold text-mist mb-6">O que faço</h1>
+          <p className="text-mist-muted font-sans leading-relaxed text-lg">
+            Os serviços da GeraTech estão detalhados na{" "}
+            <a href="/#o-que-faco" className="text-cyan font-medium hover:text-data-green underline underline-offset-2">
               página inicial
             </a>
-            . Lá você encontra consulta inicial, plano alimentar e acompanhamento.
+            : precificação inteligente, gestão de estoque & supply, promoções com ROI,
+            infraestrutura de dados, dashboards e modelos sob medida.
           </p>
         </div>
       </main>

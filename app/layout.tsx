@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -8,28 +8,38 @@ const inter = Inter({
   display: "swap",
 });
 
-const playfair = Playfair_Display({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-playfair",
+  variable: "--font-display",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Fernanda Zanatelli — Nutricionista",
+  title: "GeraTech — Dados e tecnologia para e-commerce",
   description:
-    "Consultoria nutricional personalizada com base científica. Fernanda Zanatelli, nutricionista: reeducação alimentar, objetivos de saúde e acompanhamento humanizado.",
+    "A GeraTech transforma dados brutos em decisões que aumentam sua margem. Engenharia de dados, pipelines e modelos para otimizar precificação, estoque e promoções do seu e-commerce.",
   keywords: [
-    "nutricionista",
-    "nutrição",
-    "consulta nutricional",
-    "plano alimentar",
-    "Fernanda Zanatelli",
+    "engenharia de dados",
+    "ciência de dados",
+    "e-commerce",
+    "Mercado Livre",
+    "precificação inteligente",
+    "previsão de demanda",
+    "data warehouse",
+    "pipelines de dados",
+    "GeraTech",
   ],
-  authors: [{ name: "Fernanda Zanatelli" }],
+  authors: [{ name: "GeraTech" }],
   openGraph: {
-    title: "Fernanda Zanatelli — Nutricionista",
+    title: "GeraTech — Gerando tecnologia para seu negócio",
     description:
-      "Consultoria nutricional personalizada com foco em resultados sustentáveis e bem-estar.",
+      "Infraestrutura de dados e modelos que otimizam precificação, estoque e promoções do seu e-commerce.",
     type: "website",
   },
 };
@@ -41,7 +51,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={`${inter.variable} ${playfair.variable} antialiased`}>
+      <body
+        className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} antialiased`}
+      >
         {children}
       </body>
     </html>

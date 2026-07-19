@@ -1,23 +1,29 @@
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
+import ProblemaSection from "./components/ProblemaSection";
+import ComoFuncionaSection from "./components/ComoFuncionaSection";
 import ServicosSection from "./components/ServicosSection";
-import SobreSection from "./components/SobreSection";
-import DepoimentosSection from "./components/DepoimentosSection";
+import CaseSection from "./components/CaseSection";
+import ParaQuemSection from "./components/ParaQuemSection";
 import ContatoSection from "./components/ContatoSection";
 import Footer from "./components/Footer";
+import WhatsAppFloat from "./components/WhatsAppFloat";
 
 export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="bg-cream">
+      <main className="bg-ink">
         <Hero />
+        <ProblemaSection />
+        <ComoFuncionaSection />
         <ServicosSection />
-        <SobreSection />
-        <DepoimentosSection />
+        <CaseSection />
+        <ParaQuemSection />
         <ContatoSection />
       </main>
       <Footer />
+      <WhatsAppFloat />
     </>
   );
 }
