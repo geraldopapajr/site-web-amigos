@@ -1,26 +1,40 @@
-/** Cabeçalho de seção reutilizável: eyebrow → título → underline em gradiente → intro. */
+import Reveal from "./Reveal";
 
-type SectionHeadingProps = {
+/**
+ * Cabeçalho padrão de bloco: rótulo, título e texto de abertura.
+ * Mantém a mesma hierarquia tipográfica em todas as seções.
+ */
+export default function SectionHeading({
+  eyebrow,
+  title,
+  lead,
+  align = "left",
+  id,
+}: {
   eyebrow: string;
-  title: React.ReactNode;
-  intro?: React.ReactNode;
-};
+  title: string;
+  lead?: string;
+  align?: "left" | "center";
+  id?: string;
+}) {
+  const centered = align === "center";
 
-export default function SectionHeading({ eyebrow, title, intro }: SectionHeadingProps) {
   return (
-    <div className="text-center mb-14 lg:mb-20">
-      <span className="font-mono text-xs font-medium uppercase tracking-[0.2em] text-cyan">
-        {eyebrow}
-      </span>
-      <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-mist text-balance">
+    <Reveal className={centered ? "text-center" : ""}>
+      <p className="eyebrow">{eyebrow}</p>
+      <h2
+        id={id}
+        className={`mt-5 font-display text-[clamp(2rem,4.2vw,3.15rem)] font-semibold leading-[1.08] tracking-[-0.02em] text-ink ${
+          centered ? "mx-auto max-w-3xl" : "max-w-3xl"
+        }`}
+      >
         {title}
       </h2>
-      <div className="mx-auto mt-6 h-1 w-20 rounded-full bg-gradient-to-r from-cyan to-data-green" />
-      {intro && (
-        <p className="mx-auto mt-6 max-w-3xl text-lg text-mist-muted font-sans leading-relaxed text-balance">
-          {intro}
+      {lead && (
+        <p className={`lead mt-6 text-pretty ${centered ? "mx-auto max-w-measure" : "max-w-measure"}`}>
+          {lead}
         </p>
       )}
-    </div>
+    </Reveal>
   );
 }

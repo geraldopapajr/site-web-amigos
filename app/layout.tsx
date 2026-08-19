@@ -1,49 +1,43 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { DM_Sans, Fraunces } from "next/font/google";
 import "./globals.css";
+import WhatsAppFloat from "./components/WhatsAppFloat";
+import { NOME } from "./siteConfig";
 
-const inter = Inter({
+// Tipografia do sistema "Terra & Oliva": serif macia para títulos, sans neutra para leitura.
+const sans = DM_Sans({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-sans",
   display: "swap",
 });
 
-const spaceGrotesk = Space_Grotesk({
+const display = Fraunces({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-  display: "swap",
-});
+const description =
+  "Recupere o prazer em comer e faça as pazes com o seu corpo através de um olhar humano, gentil e sem julgamentos. Nutrição comportamental, atendimento online.";
 
 export const metadata: Metadata = {
-  title: "GeraTech — Dados e tecnologia para e-commerce",
-  description:
-    "A GeraTech transforma dados brutos em decisões que aumentam sua margem. Engenharia de dados, pipelines e modelos para otimizar precificação, estoque e promoções do seu e-commerce.",
+  title: `${NOME} — Nutricionista`,
+  description,
   keywords: [
-    "engenharia de dados",
-    "ciência de dados",
-    "e-commerce",
-    "Mercado Livre",
-    "precificação inteligente",
-    "previsão de demanda",
-    "data warehouse",
-    "pipelines de dados",
-    "GeraTech",
+    "nutricionista",
+    "nutrição comportamental",
+    "consulta nutricional online",
+    "plano alimentar",
+    "reeducação alimentar",
+    NOME,
   ],
-  authors: [{ name: "GeraTech" }],
-  icons: {
-    icon: "/favicon.svg",
-  },
+  authors: [{ name: NOME }],
+  icons: { icon: "/favicon.svg" },
   openGraph: {
-    title: "GeraTech — Gerando tecnologia para seu negócio",
-    description:
-      "Infraestrutura de dados e modelos que otimizam precificação, estoque e promoções do seu e-commerce.",
+    title: `${NOME} — Nutricionista`,
+    description,
     type: "website",
+    locale: "pt_BR",
   },
 };
 
@@ -54,10 +48,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body
-        className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} antialiased`}
-      >
+      <body className={`${sans.variable} ${display.variable}`}>
         {children}
+        <WhatsAppFloat />
       </body>
     </html>
   );

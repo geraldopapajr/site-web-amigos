@@ -1,46 +1,87 @@
-import { whatsappHref, emailHref, CONTACT_EMAIL } from "../siteConfig";
+import CtaButton from "./CtaButton";
+import Reveal from "./Reveal";
+import { INSTAGRAM_HANDLE, INSTAGRAM_URL, WHATSAPP_URL } from "../siteConfig";
 
+/** Bloco 6 — Contato. */
 export default function ContatoSection() {
   return (
-    <section id="contato" className="relative overflow-hidden bg-ink py-24 lg:py-32">
+    <section id="contato" className="textured relative overflow-hidden bg-olive-dark py-24 sm:py-28 lg:py-36">
       <div
-        className="pointer-events-none absolute -top-20 left-1/2 h-[420px] w-[420px] -translate-x-1/2 glow-cyan"
+        className="pointer-events-none absolute -top-40 left-1/2 h-[46rem] w-[46rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(201,164,74,0.14),transparent_62%)]"
         aria-hidden
       />
-      <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <span className="font-mono text-xs font-medium uppercase tracking-[0.2em] text-cyan">
-          Vamos conversar
-        </span>
-        <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-mist text-balance">
-          Vamos gerar tecnologia{" "}
-          <span className="text-gradient">pro seu negócio?</span>
-        </h2>
-        <p className="mx-auto mt-6 max-w-xl text-lg text-mist-muted leading-relaxed text-balance">
-          Me chama no WhatsApp para um diagnóstico gratuito da sua operação. Em uma
-          conversa a gente já identifica onde os seus dados podem gerar mais margem.
-        </p>
 
-        <div className="mt-9 flex flex-col sm:flex-row justify-center gap-4">
-          <a
-            href={whatsappHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-cyan px-8 py-3.5 text-base font-semibold text-ink shadow-glow transition hover:bg-data-green"
-          >
-            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden>
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.247-.694.247-1.289.173-1.413-.074-.124-.272-.198-.57-.347" />
-            </svg>
-            Falar no WhatsApp
-          </a>
-          <a
-            href={emailHref}
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-8 py-3.5 text-base font-semibold text-mist transition hover:border-cyan/50 hover:bg-white/10"
-          >
-            Enviar e-mail
-          </a>
+      <div className="container-page relative">
+        <div className="mx-auto max-w-3xl text-center">
+          <Reveal>
+            <p className="eyebrow justify-center text-ocre before:bg-ocre/40">Próximo passo</p>
+            <h2 className="mt-6 font-display text-[clamp(2.1rem,4.4vw,3.3rem)] font-semibold leading-[1.1] tracking-[-0.025em] text-cream">
+              Vamos dar o primeiro passo?
+            </h2>
+          </Reveal>
+
+          <Reveal delay={90}>
+            <p className="mx-auto mt-8 max-w-measure text-pretty text-lg leading-relaxed text-cream/75">
+              Mudar a forma como nos alimentamos é um processo corajoso. Se você sente que é o momento de
+              cuidar de si com mais carinho e menos cobrança, estou aqui para te acompanhar.
+            </p>
+          </Reveal>
+
+          <Reveal delay={160}>
+            <div className="mt-12">
+              <CtaButton size="lg" variant="cream" />
+            </div>
+
+            <div className="mx-auto mt-14 grid max-w-2xl gap-4 sm:grid-cols-2">
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-4 rounded-2xl border border-cream/15 px-6 py-4 text-left transition-colors duration-300 hover:border-cream/40 hover:bg-cream/5"
+              >
+                <svg viewBox="0 0 24 24" className="h-5 w-5 shrink-0 text-ocre" fill="currentColor" aria-hidden>
+                  <path d="M12 2.5A9.5 9.5 0 0 0 3.9 17l-1.4 4.5L7.1 20A9.5 9.5 0 1 0 12 2.5Zm5.5 12.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1a11 11 0 0 1-5.7-5c-.4-.7-.8-1.6-.8-2.5s.5-1.6.8-1.9c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.4l.9 2.1c.1.2 0 .4-.1.5l-.4.5c-.1.2-.3.3-.1.6.1.3.7 1.3 1.6 2 .9.8 1.7 1.1 2 1.2.2.1.4 0 .5-.1l.7-.9c.2-.2.4-.1.6 0l1.9.9c.3.2.3.4.2.6Z" />
+                </svg>
+                <span>
+                  <span className="block font-sans text-[11px] font-semibold uppercase tracking-eyebrow text-cream/50">
+                    WhatsApp comercial
+                  </span>
+                  <span className="mt-1 block font-sans text-[15px] font-medium text-cream transition-colors group-hover:text-white">
+                    Agende sua consulta
+                  </span>
+                </span>
+              </a>
+
+              <a
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-4 rounded-2xl border border-cream/15 px-6 py-4 text-left transition-colors duration-300 hover:border-cream/40 hover:bg-cream/5"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  className="h-5 w-5 shrink-0 text-ocre"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  aria-hidden
+                >
+                  <rect x="3.5" y="3.5" width="17" height="17" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="17" cy="7" r="1.1" fill="currentColor" stroke="none" />
+                </svg>
+                <span>
+                  <span className="block font-sans text-[11px] font-semibold uppercase tracking-eyebrow text-cream/50">
+                    Instagram
+                  </span>
+                  <span className="mt-1 block font-sans text-[15px] font-medium text-cream transition-colors group-hover:text-white">
+                    {INSTAGRAM_HANDLE}
+                  </span>
+                </span>
+              </a>
+            </div>
+          </Reveal>
         </div>
-
-        <p className="mt-6 font-mono text-sm text-mist-muted">{CONTACT_EMAIL}</p>
       </div>
     </section>
   );

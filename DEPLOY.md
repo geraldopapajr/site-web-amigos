@@ -223,10 +223,10 @@ Após o deploy, você pode verificar:
 gcloud run services list
 
 # Ver detalhes do serviço
-gcloud run services describe triarquide --region=us-central1
+gcloud run services describe fernanda-zanateli --region=us-central1
 
 # Ver logs
-gcloud run services logs read triarquide --region=us-central1
+gcloud run services logs read fernanda-zanateli --region=us-central1
 ```
 
 ## Custos

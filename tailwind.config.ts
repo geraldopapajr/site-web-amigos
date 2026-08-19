@@ -1,53 +1,63 @@
 import type { Config } from "tailwindcss";
 
+/**
+ * Sistema visual "Terra & Oliva".
+ * Paleta e tipografia centralizadas aqui — trocar a identidade da marca
+ * significa mexer só neste arquivo e nas fontes em app/layout.tsx.
+ */
 const config: Config = {
-  content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+  content: ["./app/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-        accent: "var(--accent)",
-        /* Fundo — tech premium escuro */
-        ink: "#0A0E1A",
-        "ink-2": "#0D1220",
-        surface: "#111827",
-        "surface-2": "#151E30",
-        /* Texto */
-        mist: "#E6EDF3",
-        "mist-muted": "#9BA8B8",
-        /* Acentos de dados */
-        cyan: "#22D3EE",
-        "cyan-dark": "#0EA5C4",
-        "data-green": "#34D399",
-        violet: "#8B5CF6",
-      },
-      fontFamily: {
-        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
-        display: ["var(--font-display)", "system-ui", "sans-serif"],
-        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
-      },
-      boxShadow: {
-        soft: "0 2px 15px -3px rgba(0, 0, 0, 0.3), 0 10px 20px -2px rgba(0, 0, 0, 0.2)",
-        glow: "0 0 40px -8px rgba(34, 211, 238, 0.35)",
-        "glow-green": "0 0 40px -8px rgba(52, 211, 153, 0.3)",
-      },
-      backgroundImage: {
-        "grid-fade":
-          "linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px)",
-      },
-      keyframes: {
-        "float-slow": {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-10px)" },
+        cream: {
+          DEFAULT: "#FBF7F1",
+          100: "#F6F0E7",
+          200: "#EDE3D5",
+          300: "#DFD1BC",
+        },
+        ink: {
+          DEFAULT: "#211C17",
+          soft: "#4A423A",
+          muted: "#6F675D",
+        },
+        clay: {
+          DEFAULT: "#A8552F",
+          dark: "#8C4425",
+          light: "#C97A52",
+          tint: "#F3E4DA",
+        },
+        olive: {
+          DEFAULT: "#3F4A3A",
+          dark: "#252C21",
+          light: "#6E7A63",
+          tint: "#E8EBE2",
+        },
+        ocre: {
+          DEFAULT: "#C9A44A",
+          light: "#E4CD93",
         },
       },
-      animation: {
-        "float-slow": "float-slow 6s ease-in-out infinite",
+      fontFamily: {
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "Georgia", "serif"],
+      },
+      letterSpacing: {
+        eyebrow: "0.16em",
+      },
+      borderRadius: {
+        arch: "999px 999px 32px 32px",
+      },
+      maxWidth: {
+        measure: "62ch",
+      },
+      boxShadow: {
+        soft: "0 1px 2px rgba(33,28,23,0.04), 0 14px 34px -14px rgba(33,28,23,0.14)",
+        lift: "0 2px 4px rgba(33,28,23,0.05), 0 26px 50px -22px rgba(33,28,23,0.24)",
+        cta: "0 12px 26px -12px rgba(168,85,47,0.55)",
+      },
+      transitionTimingFunction: {
+        gentle: "cubic-bezier(0.22, 1, 0.36, 1)",
       },
     },
   },

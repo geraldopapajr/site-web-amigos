@@ -8,11 +8,11 @@ on:
 
 env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-  SERVICE_NAME: geratech
+  SERVICE_NAME: fernanda-zanateli
   REGION: ${{ secrets.GCP_REGION }}
-  # Repositório do Artifact Registry mantido (já existe no projeto; renomear quebraria o push)
+  # Repositório do Artifact Registry mantido: já existe no projeto e é compartilhado.
   ARTIFACT_REGISTRY_REPO: triarquide-repo
-  IMAGE_NAME: geratech
+  IMAGE_NAME: fernanda-zanateli
 
 jobs:
   deploy:

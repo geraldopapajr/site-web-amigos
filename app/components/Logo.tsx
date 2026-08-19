@@ -1,59 +1,48 @@
+import { NOME, PROFISSAO } from "../siteConfig";
+
 /**
- * Logo GeraTech — mark de dados (barras ascendentes conectadas por um nó de pipeline)
- * + wordmark "Gera" (regular) / "Tech" (bold, gradiente).
- *
- * Uso:
- *   <Logo />                → mark + wordmark
- *   <Logo showWordmark={false} />  → só o mark (favicon, mobile compacto)
+ * Lockup da marca: marca gráfica (folha/semente) + assinatura tipográfica.
+ * PENDÊNCIA: substituir a marca gráfica pelo logo oficial quando a identidade
+ * visual da Fernanda estiver fechada.
  */
+export default function Logo({ tone = "ink" }: { tone?: "ink" | "cream" }) {
+  const claro = tone === "cream";
 
-type LogoProps = {
-  className?: string;
-  showWordmark?: boolean;
-};
-
-export function LogoMark({ className = "" }: { className?: string }) {
   return (
-    <svg
-      viewBox="0 0 40 40"
-      className={className}
-      role="img"
-      aria-label="GeraTech"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <defs>
-        <linearGradient id="gt-grad" x1="0" y1="40" x2="40" y2="0" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#22D3EE" />
-          <stop offset="1" stopColor="#34D399" />
-        </linearGradient>
-      </defs>
-      {/* Barras ascendentes (dados crescendo) */}
-      <rect x="4" y="24" width="6" height="12" rx="2" fill="#22D3EE" opacity="0.55" />
-      <rect x="14" y="17" width="6" height="19" rx="2" fill="url(#gt-grad)" opacity="0.8" />
-      <rect x="24" y="9" width="6" height="27" rx="2" fill="url(#gt-grad)" />
-      {/* Nó de pipeline / linha de tendência conectando o topo das barras */}
-      <path
-        d="M7 24 L17 17 L27 9"
-        stroke="#34D399"
-        strokeWidth="2.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle cx="27" cy="9" r="3.2" fill="#0A0E1A" stroke="#34D399" strokeWidth="2.2" />
-    </svg>
-  );
-}
-
-export default function Logo({ className = "", showWordmark = true }: LogoProps) {
-  return (
-    <span className={`inline-flex items-center gap-2.5 ${className}`}>
-      <LogoMark className="h-9 w-9 shrink-0" />
-      {showWordmark && (
-        <span className="font-display text-xl lg:text-2xl font-medium tracking-tight text-mist">
-          Gera<span className="font-bold text-gradient">Tech</span>
+    <span className="flex items-center gap-3">
+      <svg viewBox="0 0 32 32" className="h-8 w-8 shrink-0" aria-hidden>
+        <circle cx="16" cy="16" r="15" className={claro ? "fill-cream/10" : "fill-clay/10"} />
+        <path
+          d="M16 24.5c0-5 1.6-8.6 5.4-11.2-.6 4.9-2.3 8.6-5.4 11.2Z"
+          className={claro ? "fill-ocre" : "fill-clay"}
+        />
+        <path
+          d="M16 24.5C13 21.9 11.2 18.2 10.6 13.3 14.4 15.9 16 19.5 16 24.5Z"
+          className={claro ? "fill-cream/70" : "fill-olive"}
+        />
+        <path
+          d="M16 24.5V9"
+          className={claro ? "stroke-cream/45" : "stroke-ocre"}
+          strokeWidth="1.4"
+          strokeLinecap="round"
+        />
+      </svg>
+      <span className="flex flex-col leading-none">
+        <span
+          className={`font-display text-[17px] font-semibold tracking-[-0.01em] ${
+            claro ? "text-cream" : "text-ink"
+          }`}
+        >
+          {NOME}
         </span>
-      )}
+        <span
+          className={`mt-1 font-sans text-[10px] font-medium uppercase tracking-eyebrow ${
+            claro ? "text-cream/60" : "text-ink-muted"
+          }`}
+        >
+          {PROFISSAO}
+        </span>
+      </span>
     </span>
   );
 }

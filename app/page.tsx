@@ -1,29 +1,26 @@
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import ProblemaSection from "./components/ProblemaSection";
-import ComoFuncionaSection from "./components/ComoFuncionaSection";
-import ServicosSection from "./components/ServicosSection";
-import CaseSection from "./components/CaseSection";
-import ParaQuemSection from "./components/ParaQuemSection";
+import QuemSouSection from "./components/QuemSouSection";
+import EspecialidadesSection from "./components/EspecialidadesSection";
+import MetodoSection from "./components/MetodoSection";
+import DepoimentosSection from "./components/DepoimentosSection";
 import ContatoSection from "./components/ContatoSection";
 import Footer from "./components/Footer";
-import WhatsAppFloat from "./components/WhatsAppFloat";
 
+// Ordem dos blocos conforme o documento de copy final (Vincla Studio).
 export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="bg-ink">
+      <main className="bg-cream">
         <Hero />
-        <ProblemaSection />
-        <ComoFuncionaSection />
-        <ServicosSection />
-        <CaseSection />
-        <ParaQuemSection />
+        <QuemSouSection />
+        <EspecialidadesSection />
+        <MetodoSection />
+        <DepoimentosSection />
         <ContatoSection />
       </main>
       <Footer />
-      <WhatsAppFloat />
     </>
   );
 }

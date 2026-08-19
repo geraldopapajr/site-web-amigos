@@ -2,25 +2,63 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #0a0e1a;
-  --foreground: #e6edf3;
-  --accent: #22d3ee;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-cream font-sans text-ink antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+    text-wrap: balance;
+  }
+
+  ::selection {
+    @apply bg-clay/20 text-ink;
+  }
+
+  :where(a, button, [tabindex]):focus-visible {
+    @apply rounded-sm outline-none ring-2 ring-clay/60 ring-offset-2 ring-offset-cream;
+  }
+
+  /* Ancoras respeitam o header fixo sem calculo de offset em JS. */
+  section[id] {
+    scroll-margin-top: 6rem;
+  }
 }
 
-html {
-  scroll-behavior: smooth;
-}
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-6 lg:px-10;
+  }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: var(--font-inter), system-ui, sans-serif;
-}
+  /* Rotulo curto acima dos titulos, com filete a esquerda. */
+  .eyebrow {
+    @apply inline-flex items-center gap-3 font-sans text-[11px] font-semibold uppercase tracking-eyebrow text-clay;
+  }
 
-/* Scrollbar sutil no tema escuro */
-::selection {
-  background: rgba(34, 211, 238, 0.25);
+  .eyebrow::before {
+    content: "";
+    @apply h-px w-8 shrink-0 bg-clay/40;
+  }
+
+  .lead {
+    @apply text-lg leading-relaxed text-ink-soft sm:text-xl;
+  }
+
+  .prose-fz p {
+    @apply text-[17px] leading-[1.75] text-ink-soft sm:text-lg;
+  }
+
+  .prose-fz strong {
+    @apply font-semibold text-ink;
+  }
 }
 
 @layer utilities {
@@ -28,29 +66,50 @@ body {
     text-wrap: balance;
   }
 
-  /* Grid de fundo com fade radial */
-  .bg-grid {
-    background-image:
-      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-    background-size: 56px 56px;
-    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
-    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+  .text-pretty {
+    text-wrap: pretty;
   }
 
-  /* Texto com gradiente ciano → verde-dados */
-  .text-gradient {
-    background-image: linear-gradient(120deg, #22d3ee 0%, #34d399 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+  /* Textura de papel discreta, usada em paineis decorativos. */
+  .textured {
+    position: relative;
+    isolation: isolate;
   }
 
-  /* Glow radial (usado atrás do hero / seções de destaque) */
-  .glow-cyan {
-    background: radial-gradient(circle at center, rgba(34, 211, 238, 0.18) 0%, transparent 65%);
+  .textured::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+    opacity: 0.6;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/><feColorMatrix type='saturate' values='0'/></filter><rect width='140' height='140' filter='url(%23n)' opacity='0.045'/></svg>");
   }
-  .glow-green {
-    background: radial-gradient(circle at center, rgba(52, 211, 153, 0.16) 0%, transparent 65%);
+}
+
+/* Animacao de rolagem (Bloco Global) — ver app/components/Reveal.tsx */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 800ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal,
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }
