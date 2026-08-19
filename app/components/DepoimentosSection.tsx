@@ -3,6 +3,7 @@
 import { useState } from "react";
 import CtaButton from "./CtaButton";
 import Reveal from "./Reveal";
+import SectionHeading from "./SectionHeading";
 import { DEPOIMENTOS } from "../siteConfig";
 
 /**
@@ -23,38 +24,34 @@ export default function DepoimentosSection() {
   const depoimento = DEPOIMENTOS[atual];
 
   return (
-    <section id="depoimentos" className="relative py-28 lg:py-36 bg-gradient-to-b from-white via-cream-light to-white">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-bronze/25 to-transparent" />
+    <section id="depoimentos" className="relative bg-cream-100 py-24 sm:py-28 lg:py-36">
+      <div className="container-page">
+        <SectionHeading eyebrow="Confiança" title="O que dizem minhas pacientes" align="center" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Reveal className="text-center mb-14">
-          <span className="text-sm font-sans font-semibold text-bronze-dark uppercase tracking-wider">
-            Confiança
-          </span>
-          <h2 className="mt-3 text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-graphite mb-6">
-            O que dizem minhas pacientes
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-bronze to-bronze-light mx-auto" />
-        </Reveal>
-
-        <Reveal className="max-w-3xl mx-auto">
+        <Reveal className="mx-auto mt-16 max-w-3xl">
           <div
-            className="relative bg-white rounded-2xl p-10 lg:p-12 border border-bronze/10 shadow-soft"
+            className="relative rounded-[2rem] border border-ink/8 bg-cream p-9 shadow-soft sm:p-12"
             role="group"
             aria-roledescription="carrossel"
             aria-label="Depoimentos de pacientes"
           >
+            <svg viewBox="0 0 32 24" className="h-6 w-8 text-ocre" fill="currentColor" aria-hidden>
+              <path d="M13 24V13.4C13 6.5 17.2 1.7 24 0l1.6 4C21.4 5.5 19 8.2 19 11.3h4.3V24H13Zm-13 0V13.4C0 6.5 4.2 1.7 11 0l1.6 4C8.4 5.5 6 8.2 6 11.3h4.3V24H0Z" />
+            </svg>
+
             <blockquote>
               <p
-                className="text-lg lg:text-xl text-graphite-light font-sans leading-relaxed"
+                className="mt-7 font-display text-[clamp(1.25rem,2.2vw,1.65rem)] font-medium leading-[1.5] tracking-[-0.015em] text-ink"
                 aria-live="polite"
               >
-                &ldquo;{depoimento.texto}&rdquo;
+                {depoimento.texto}
               </p>
-              <footer className="mt-8 border-t border-bronze/10 pt-6">
-                <cite className="not-italic font-semibold text-graphite font-sans">{depoimento.nome}</cite>
+              <footer className="mt-8 border-t border-ink/8 pt-6">
+                <cite className="font-sans text-[15px] font-semibold not-italic text-ink">
+                  {depoimento.nome}
+                </cite>
                 {depoimento.detalhe && (
-                  <p className="text-sm text-bronze-dark/80 mt-1 font-sans">{depoimento.detalhe}</p>
+                  <p className="mt-1 font-sans text-[13px] text-ink-muted">{depoimento.detalhe}</p>
                 )}
               </footer>
             </blockquote>
@@ -70,18 +67,18 @@ export default function DepoimentosSection() {
                       aria-selected={i === atual}
                       aria-label={`Depoimento ${i + 1} de ${total}`}
                       onClick={() => setAtual(i)}
-                      className={`h-2.5 rounded-full transition-all ${
-                        i === atual ? "w-7 bg-bronze" : "w-2.5 bg-bronze/25 hover:bg-bronze/50"
+                      className={`h-1.5 rounded-full transition-all duration-300 ease-gentle ${
+                        i === atual ? "w-8 bg-clay" : "w-1.5 bg-ink/20 hover:bg-clay/50"
                       }`}
                     />
                   ))}
                 </div>
-                <div className="flex gap-3">
+                <div className="flex gap-2">
                   <button
                     type="button"
                     onClick={() => ir(atual - 1)}
                     aria-label="Depoimento anterior"
-                    className="flex h-10 w-10 items-center justify-center rounded-full border border-bronze/25 text-bronze-dark transition hover:border-bronze hover:bg-cream-light"
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-ink/12 text-ink-soft transition-colors hover:border-clay hover:text-clay"
                   >
                     <span aria-hidden>←</span>
                   </button>
@@ -89,7 +86,7 @@ export default function DepoimentosSection() {
                     type="button"
                     onClick={() => ir(atual + 1)}
                     aria-label="Próximo depoimento"
-                    className="flex h-10 w-10 items-center justify-center rounded-full border border-bronze/25 text-bronze-dark transition hover:border-bronze hover:bg-cream-light"
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-ink/12 text-ink-soft transition-colors hover:border-clay hover:text-clay"
                   >
                     <span aria-hidden>→</span>
                   </button>
@@ -98,13 +95,11 @@ export default function DepoimentosSection() {
             )}
           </div>
 
-          <div className="mt-10 text-center">
+          <div className="mt-12 flex justify-center">
             <CtaButton />
           </div>
         </Reveal>
       </div>
-
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-bronze/25 to-transparent" />
     </section>
   );
 }

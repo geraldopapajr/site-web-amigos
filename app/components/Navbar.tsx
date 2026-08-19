@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { CTA_LABEL, DEPOIMENTOS, NOME, PROFISSAO, WHATSAPP_URL } from "../siteConfig";
+import Logo from "./Logo";
+import { CTA_LABEL, DEPOIMENTOS, WHATSAPP_URL } from "../siteConfig";
 
 // Ordem dos blocos do site. Depoimentos (Bloco 5) só entra no menu quando
 // houver depoimentos reais cadastrados em siteConfig.
@@ -17,116 +18,174 @@ const sections = [
 
 export default function Navbar() {
   const pathname = usePathname();
-  const [activeSection, setActiveSection] = useState("");
+  const isHome = pathname === "/";
+  const [scrolled, setScrolled] = useState(false);
+  const [active, setActive] = useState("");
+  const [menuAberto, setMenuAberto] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 120;
-
-      for (const { id } of sections) {
-        const element = document.getElementById(id);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(id);
-            break;
-          }
-        }
-      }
+    const onScroll = () => {
+      setScrolled(window.scrollY > 24);
+      // No topo (ainda no hero) nenhum item do menu fica marcado.
+      if (window.scrollY < 300) setActive("");
     };
-
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
-
-    return () => window.removeEventListener("scroll", handleScroll);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const scrollToId = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      window.scrollTo({
-        top: element.offsetTop - 80,
-        behavior: "smooth",
-      });
-    }
-  };
+  // Seção ativa via IntersectionObserver — sem cálculo de offset no scroll.
+  useEffect(() => {
+    if (!isHome || typeof IntersectionObserver === "undefined") return;
 
-  const handleSectionClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-    if (pathname === "/") {
-      e.preventDefault();
-      scrollToId(id);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visivel = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visivel) setActive(visivel.target.id);
+      },
+      { rootMargin: "-45% 0px -45% 0px", threshold: [0, 0.25, 0.5, 1] }
+    );
+
+    for (const { id } of sections) {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
     }
-  };
+    return () => observer.disconnect();
+  }, [isHome]);
+
+  // Menu mobile: trava a rolagem do fundo e fecha no Esc.
+  useEffect(() => {
+    if (!menuAberto) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMenuAberto(false);
+    };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [menuAberto]);
+
+  const hrefDe = (id: string) => (isHome ? `#${id}` : `/#${id}`);
 
   return (
-    <nav
-      className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-b border-bronze/20 shadow-sm"
-      role="navigation"
-      aria-label="Navegação principal"
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-gentle ${
+        scrolled || menuAberto
+          ? "border-b border-ink/8 bg-cream/90 backdrop-blur-md"
+          : "border-b border-transparent bg-transparent"
+      }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20 lg:h-24 gap-4">
+      <nav className="container-page" aria-label="Navegação principal">
+        <div
+          className={`flex items-center justify-between gap-6 transition-all duration-500 ease-gentle ${
+            scrolled ? "h-[68px]" : "h-[84px]"
+          }`}
+        >
           <Link
             href="/"
-            onClick={(e) => {
-              if (pathname === "/") {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }
-            }}
-            className="flex items-center gap-3 hover:opacity-85 transition-opacity"
-            aria-label="Ir para página inicial"
+            className="transition-opacity hover:opacity-70"
+            aria-label="Ir para a página inicial"
+            onClick={() => setMenuAberto(false)}
           >
-            {/* PENDÊNCIA: aplicar o logo da marca no lugar do monograma. */}
-            <span
-              className="flex h-11 w-11 lg:h-12 lg:w-12 shrink-0 items-center justify-center rounded-full bg-bronze/12 text-lg font-display font-semibold text-bronze-dark"
-              aria-hidden
-            >
-              FZ
-            </span>
-            <span className="flex flex-col leading-tight">
-              <span className="text-lg lg:text-xl font-display font-semibold text-graphite">{NOME}</span>
-              <span className="text-xs font-sans font-medium uppercase tracking-wider text-bronze-dark/90">
-                {PROFISSAO}
-              </span>
-            </span>
+            <Logo />
           </Link>
 
-          <div className="flex items-center gap-6">
-            <ul className="hidden md:flex flex-wrap justify-end gap-x-6 gap-y-2 lg:gap-x-8" role="list">
-              {sections.map((item) => {
-                const isActive = pathname === "/" && activeSection === item.id;
-                const href = pathname === "/" ? `#${item.id}` : `/#${item.id}`;
-                return (
-                  <li key={item.id}>
-                    <Link
-                      href={href}
-                      onClick={(e) => handleSectionClick(e, item.id)}
-                      className={`text-sm lg:text-base font-medium transition-all duration-300 ${
-                        isActive
-                          ? "text-graphite border-b-2 border-bronze pb-1 font-semibold"
-                          : "text-graphite/80 hover:text-bronze hover:border-b-2 hover:border-bronze/30 pb-1"
-                      }`}
-                      aria-current={isActive ? "page" : undefined}
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
+          <ul className="hidden items-center gap-9 md:flex" role="list">
+            {sections.map((item) => {
+              const isActive = isHome && active === item.id;
+              return (
+                <li key={item.id}>
+                  <Link
+                    href={hrefDe(item.id)}
+                    aria-current={isActive ? "true" : undefined}
+                    className={`relative font-sans text-[14px] font-medium transition-colors duration-300 after:absolute after:-bottom-1.5 after:left-0 after:h-px after:bg-clay after:transition-all after:duration-300 after:ease-gentle ${
+                      isActive
+                        ? "text-ink after:w-full"
+                        : "text-ink-soft after:w-0 hover:text-clay-dark hover:after:w-full"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
 
+          <div className="flex items-center gap-3">
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-full bg-bronze px-5 py-2.5 text-sm font-semibold text-white shadow-bronze transition hover:bg-bronze-dark"
+              className="hidden rounded-full bg-clay px-5 py-2.5 font-sans text-[13px] font-semibold text-cream shadow-cta transition-colors duration-300 hover:bg-clay-dark sm:inline-flex"
             >
               {CTA_LABEL}
             </a>
+
+            <button
+              type="button"
+              onClick={() => setMenuAberto((v) => !v)}
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-ink/12 text-ink transition-colors hover:border-clay hover:text-clay md:hidden"
+              aria-expanded={menuAberto}
+              aria-controls="menu-mobile"
+              aria-label={menuAberto ? "Fechar menu" : "Abrir menu"}
+            >
+              <span className="relative block h-3 w-4">
+                <span
+                  className={`absolute left-0 h-px w-full bg-current transition-all duration-300 ease-gentle ${
+                    menuAberto ? "top-1.5 rotate-45" : "top-0"
+                  }`}
+                />
+                <span
+                  className={`absolute left-0 top-1.5 h-px w-full bg-current transition-opacity duration-200 ${
+                    menuAberto ? "opacity-0" : "opacity-100"
+                  }`}
+                />
+                <span
+                  className={`absolute left-0 h-px w-full bg-current transition-all duration-300 ease-gentle ${
+                    menuAberto ? "top-1.5 -rotate-45" : "top-3"
+                  }`}
+                />
+              </span>
+            </button>
           </div>
         </div>
+      </nav>
+
+      {/* Painel de navegação mobile */}
+      <div
+        id="menu-mobile"
+        hidden={!menuAberto}
+        className="border-t border-ink/8 bg-cream/95 backdrop-blur-md md:hidden"
+      >
+        <ul className="container-page flex flex-col py-4" role="list">
+          {sections.map((item) => (
+            <li key={item.id} className="border-b border-ink/8 last:border-0">
+              <Link
+                href={hrefDe(item.id)}
+                onClick={() => setMenuAberto(false)}
+                className="block py-4 font-display text-xl text-ink transition-colors hover:text-clay"
+              >
+                {item.label}
+              </Link>
+            </li>
+          ))}
+          <li className="pt-6 pb-2">
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMenuAberto(false)}
+              className="flex w-full items-center justify-center rounded-full bg-clay px-6 py-3.5 font-sans text-[15px] font-semibold text-cream"
+            >
+              {CTA_LABEL}
+            </a>
+          </li>
+        </ul>
       </div>
-    </nav>
+    </header>
   );
 }

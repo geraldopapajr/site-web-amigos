@@ -1,23 +1,24 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { DM_Sans, Fraunces } from "next/font/google";
 import "./globals.css";
 import WhatsAppFloat from "./components/WhatsAppFloat";
 import { NOME } from "./siteConfig";
 
-const inter = Inter({
+// Tipografia do sistema "Terra & Oliva": serif macia para títulos, sans neutra para leitura.
+const sans = DM_Sans({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-sans",
   display: "swap",
 });
 
-const playfair = Playfair_Display({
+const display = Fraunces({
   subsets: ["latin"],
-  variable: "--font-playfair",
+  variable: "--font-display",
   display: "swap",
 });
 
 const description =
-  "Recupere o prazer em comer e faça as pazes com o seu corpo através de um olhar humano, gentil e sem julgamentos. Nutrição comportamental com atendimento online.";
+  "Recupere o prazer em comer e faça as pazes com o seu corpo através de um olhar humano, gentil e sem julgamentos. Nutrição comportamental, atendimento online.";
 
 export const metadata: Metadata = {
   title: `${NOME} — Nutricionista`,
@@ -31,10 +32,12 @@ export const metadata: Metadata = {
     NOME,
   ],
   authors: [{ name: NOME }],
+  icons: { icon: "/favicon.svg" },
   openGraph: {
     title: `${NOME} — Nutricionista`,
     description,
     type: "website",
+    locale: "pt_BR",
   },
 };
 
@@ -45,7 +48,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={`${inter.variable} ${playfair.variable} antialiased`}>
+      <body className={`${sans.variable} ${display.variable}`}>
         {children}
         <WhatsAppFloat />
       </body>

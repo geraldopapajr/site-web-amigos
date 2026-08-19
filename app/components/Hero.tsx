@@ -1,76 +1,89 @@
 import CtaButton from "./CtaButton";
+import Portrait from "./Portrait";
 import Reveal from "./Reveal";
-import { CRN, NOME, PROFISSAO } from "../siteConfig";
+import { CRN } from "../siteConfig";
+
+const provas = [
+  { titulo: "Atendimento", detalhe: "100% online, por videochamada" },
+  { titulo: "Abordagem", detalhe: "Nutrição comportamental" },
+  { titulo: "Registro", detalhe: CRN },
+];
 
 /** Bloco 1 — Abertura (Hero). */
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col lg:flex-row overflow-hidden bg-gradient-to-b from-cream via-cream-light to-cream">
-      <div className="absolute top-0 right-0 w-[28rem] h-[28rem] bg-bronze/8 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-      <div className="absolute bottom-0 left-0 w-[28rem] h-[28rem] bg-bronze/6 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+    <section className="textured relative overflow-hidden bg-cream pt-32 pb-16 sm:pt-40 lg:pt-44 lg:pb-24">
+      {/* Fundo: dois campos de luz muito suaves, sem gradiente chapado. */}
+      <div
+        className="pointer-events-none absolute -top-32 right-[-10%] h-[42rem] w-[42rem] rounded-full bg-[radial-gradient(circle_at_center,rgba(201,164,74,0.16),transparent_65%)]"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute bottom-[-20%] left-[-15%] h-[38rem] w-[38rem] rounded-full bg-[radial-gradient(circle_at_center,rgba(63,74,58,0.10),transparent_65%)]"
+        aria-hidden
+      />
 
-      <div className="flex-1 flex flex-col lg:flex-row relative z-10 min-h-screen">
-        <div className="flex-1 flex items-center justify-center lg:justify-start px-4 sm:px-6 lg:px-12 xl:px-16 pt-28 pb-20 lg:pt-32 lg:pb-24">
-          <div className="max-w-2xl">
+      <div className="container-page relative">
+        <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-7">
             <Reveal>
-              <span className="inline-block text-xs font-sans font-semibold text-bronze-dark uppercase tracking-wider bg-bronze/10 px-4 py-2 rounded-full">
-                Nutrição clínica · Base científica
-              </span>
+              <p className="eyebrow">Nutrição clínica · Base científica</p>
             </Reveal>
 
-            <Reveal delay={80}>
-              <h1 className="mt-6 text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-graphite leading-tight text-balance">
-                Recupere o prazer em comer e faça as pazes com o seu corpo através de um olhar
-                humano, gentil e sem julgamentos.
+            <Reveal delay={90}>
+              <h1 className="mt-7 font-display text-[clamp(2.1rem,4.6vw,3.4rem)] font-semibold leading-[1.1] tracking-[-0.025em] text-ink">
+                Recupere o prazer em comer e faça as pazes com o seu corpo através de um{" "}
+                <em className="not-italic text-clay">olhar humano, gentil e sem julgamentos</em>.
               </h1>
             </Reveal>
 
-            <Reveal delay={140}>
-              <div className="w-20 h-1 bg-gradient-to-r from-bronze to-bronze-light my-8" />
-              <p className="text-lg sm:text-xl text-graphite-light font-sans leading-relaxed max-w-xl text-balance">
+            <Reveal delay={160}>
+              <p className="lead mt-7 max-w-measure text-pretty">
                 Planos alinhados ao seu estilo de vida, exames e metas.
               </p>
             </Reveal>
 
-            <Reveal delay={200}>
-              <div className="mt-10 flex flex-col sm:flex-row sm:items-center gap-5">
+            <Reveal delay={220}>
+              <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-5">
                 <CtaButton size="lg" />
-                <span className="text-sm font-sans font-medium text-bronze-dark/90">
-                  {NOME} · {PROFISSAO} · {CRN}
-                </span>
+                <a
+                  href="#metodo"
+                  className="font-sans text-[15px] font-medium text-ink-soft underline decoration-ink/20 underline-offset-[6px] transition-colors hover:text-clay hover:decoration-clay"
+                >
+                  Como funciona
+                </a>
               </div>
             </Reveal>
-          </div>
-        </div>
 
-        {/* PENDÊNCIA: foto profissional da Fernanda (ensaio fotográfico), aplicada sobre a identidade visual. */}
-        <div className="flex-1 relative min-h-[320px] lg:min-h-0 flex items-center justify-center p-8 lg:p-12">
-          <Reveal delay={120} className="w-full max-w-md">
-            <div className="relative w-full aspect-square">
-              <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-bronze/15 via-cream-light to-bronze/5 ring-1 ring-bronze/15" />
-              <div className="absolute inset-6 rounded-[2rem] bg-white/70 backdrop-blur-sm shadow-soft flex flex-col items-center justify-center text-center p-8 ring-1 ring-bronze/10">
-                <svg
-                  className="w-14 h-14 text-bronze/30 mb-3"
-                  viewBox="0 0 48 48"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.25"
-                  aria-hidden
-                >
-                  <path d="M24 8c-8 12-8 20 0 28M24 8c8 12 8 20 0 28M12 20c8 4 16 4 24 0M14 28c6 3 14 3 20 0" />
-                </svg>
-                <p className="font-display text-2xl text-graphite mb-2">{NOME}</p>
-                <p className="text-sm text-graphite-light leading-relaxed">
-                  {PROFISSAO} · {CRN}
-                </p>
+            <Reveal delay={280}>
+              <dl className="mt-14 grid max-w-xl grid-cols-1 gap-px overflow-hidden rounded-2xl bg-ink/8 sm:grid-cols-3">
+                {provas.map((prova) => (
+                  <div key={prova.titulo} className="bg-cream px-5 py-4">
+                    <dt className="font-sans text-[10px] font-semibold uppercase tracking-eyebrow text-ink-muted">
+                      {prova.titulo}
+                    </dt>
+                    <dd className="mt-1.5 font-sans text-[14px] font-medium leading-snug text-ink">
+                      {prova.detalhe}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </Reveal>
+          </div>
+
+          {/* PENDÊNCIA: ensaio fotográfico profissional para este bloco. */}
+          <Reveal delay={140} className="lg:col-span-5">
+            <div className="relative mx-auto max-w-[380px] lg:mr-0">
+              <Portrait priority sizes="(max-width: 1024px) 80vw, 380px" />
+              <div className="absolute -left-4 bottom-8 rounded-full border border-ocre/50 bg-cream px-4 py-2 shadow-soft sm:-left-6">
+                <span className="font-sans text-[11px] font-semibold uppercase tracking-eyebrow text-clay">
+                  {CRN}
+                </span>
               </div>
             </div>
           </Reveal>
         </div>
       </div>
-
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-cream to-transparent z-20 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-bronze/35 to-transparent z-30" />
     </section>
   );
 }

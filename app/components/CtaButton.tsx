@@ -10,20 +10,19 @@ export default function CtaButton({
   variant = "solid",
   className = "",
 }: {
-  size?: "md" | "lg";
-  variant?: "solid" | "outline";
+  size?: "sm" | "md" | "lg";
+  variant?: "solid" | "outline" | "cream";
   className?: string;
 }) {
-  const base =
-    "inline-flex items-center justify-center rounded-full font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bronze";
   const sizes = {
-    md: "px-8 py-3.5 text-base",
-    lg: "px-10 py-4 text-lg",
+    sm: "px-5 py-2.5 text-[13px]",
+    md: "px-7 py-3.5 text-[15px]",
+    lg: "px-9 py-4 text-base",
   };
   const variants = {
-    solid: "bg-bronze text-white shadow-bronze hover:bg-bronze-dark",
-    outline:
-      "border-2 border-bronze/35 bg-white/80 text-bronze-dark hover:border-bronze hover:bg-cream-light",
+    solid: "bg-clay text-cream shadow-cta hover:bg-clay-dark",
+    outline: "border border-ink/15 bg-transparent text-ink hover:border-clay hover:text-clay-dark",
+    cream: "bg-cream text-ink hover:bg-white",
   };
 
   return (
@@ -31,9 +30,21 @@ export default function CtaButton({
       href={WHATSAPP_URL}
       target="_blank"
       rel="noopener noreferrer"
-      className={`${base} ${sizes[size]} ${variants[variant]} ${className}`}
+      className={`group inline-flex items-center gap-2.5 rounded-full font-sans font-semibold tracking-[-0.01em] transition-all duration-300 ease-gentle ${sizes[size]} ${variants[variant]} ${className}`}
     >
       {CTA_LABEL}
+      <svg
+        viewBox="0 0 16 16"
+        className="h-3.5 w-3.5 transition-transform duration-300 ease-gentle group-hover:translate-x-1"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden
+      >
+        <path d="M2.5 8h11M9.5 4l4 4-4 4" />
+      </svg>
     </a>
   );
 }

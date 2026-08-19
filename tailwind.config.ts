@@ -1,36 +1,63 @@
 import type { Config } from "tailwindcss";
 
+/**
+ * Sistema visual "Terra & Oliva".
+ * Paleta e tipografia centralizadas aqui — trocar a identidade da marca
+ * significa mexer só neste arquivo e nas fontes em app/layout.tsx.
+ */
 const config: Config = {
-  content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+  content: ["./app/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-        accent: "var(--accent)",
-        cream: "#f7faf8",
-        "cream-light": "#fbfcfb",
-        "cream-dark": "#eef3f0",
-        graphite: "#1e2924",
-        "graphite-light": "#3d4f47",
-        "graphite-dark": "#121a16",
-        /* Accent palette (wellness / sage) — classes “bronze” mantidas para compatibilidade */
-        bronze: "#2f6f55",
-        "bronze-light": "#3d8a6c",
-        "bronze-dark": "#245544",
-        "bronze-accent": "#368262",
+        cream: {
+          DEFAULT: "#FBF7F1",
+          100: "#F6F0E7",
+          200: "#EDE3D5",
+          300: "#DFD1BC",
+        },
+        ink: {
+          DEFAULT: "#211C17",
+          soft: "#4A423A",
+          muted: "#6F675D",
+        },
+        clay: {
+          DEFAULT: "#A8552F",
+          dark: "#8C4425",
+          light: "#C97A52",
+          tint: "#F3E4DA",
+        },
+        olive: {
+          DEFAULT: "#3F4A3A",
+          dark: "#252C21",
+          light: "#6E7A63",
+          tint: "#E8EBE2",
+        },
+        ocre: {
+          DEFAULT: "#C9A44A",
+          light: "#E4CD93",
+        },
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
-        display: ["var(--font-playfair)", "serif"],
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "Georgia", "serif"],
+      },
+      letterSpacing: {
+        eyebrow: "0.16em",
+      },
+      borderRadius: {
+        arch: "999px 999px 32px 32px",
+      },
+      maxWidth: {
+        measure: "62ch",
       },
       boxShadow: {
-        soft: "0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)",
-        bronze: "0 4px 20px -2px rgba(47, 111, 85, 0.18)",
+        soft: "0 1px 2px rgba(33,28,23,0.04), 0 14px 34px -14px rgba(33,28,23,0.14)",
+        lift: "0 2px 4px rgba(33,28,23,0.05), 0 26px 50px -22px rgba(33,28,23,0.24)",
+        cta: "0 12px 26px -12px rgba(168,85,47,0.55)",
+      },
+      transitionTimingFunction: {
+        gentle: "cubic-bezier(0.22, 1, 0.36, 1)",
       },
     },
   },
