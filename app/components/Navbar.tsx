@@ -3,13 +3,17 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { CTA_LABEL, DEPOIMENTOS, NOME, PROFISSAO, WHATSAPP_URL } from "../siteConfig";
 
+// Ordem dos blocos do site. Depoimentos (Bloco 5) só entra no menu quando
+// houver depoimentos reais cadastrados em siteConfig.
 const sections = [
-  { id: "servicos", label: "Serviços" },
   { id: "sobre", label: "Sobre" },
-  { id: "depoimentos", label: "Depoimentos" },
+  { id: "especialidades", label: "Especialidades" },
+  { id: "metodo", label: "Método" },
+  ...(DEPOIMENTOS.length > 0 ? [{ id: "depoimentos", label: "Depoimentos" }] : []),
   { id: "contato", label: "Contato" },
-] as const;
+];
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -61,7 +65,7 @@ export default function Navbar() {
       aria-label="Navegação principal"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20 lg:h-24">
+        <div className="flex justify-between items-center h-20 lg:h-24 gap-4">
           <Link
             href="/"
             onClick={(e) => {
@@ -73,6 +77,7 @@ export default function Navbar() {
             className="flex items-center gap-3 hover:opacity-85 transition-opacity"
             aria-label="Ir para página inicial"
           >
+            {/* PENDÊNCIA: aplicar o logo da marca no lugar do monograma. */}
             <span
               className="flex h-11 w-11 lg:h-12 lg:w-12 shrink-0 items-center justify-center rounded-full bg-bronze/12 text-lg font-display font-semibold text-bronze-dark"
               aria-hidden
@@ -80,36 +85,46 @@ export default function Navbar() {
               FZ
             </span>
             <span className="flex flex-col leading-tight">
-              <span className="text-lg lg:text-xl font-display font-semibold text-graphite">
-                Fernanda Zanatelli
-              </span>
+              <span className="text-lg lg:text-xl font-display font-semibold text-graphite">{NOME}</span>
               <span className="text-xs font-sans font-medium uppercase tracking-wider text-bronze-dark/90">
-                Nutricionista
+                {PROFISSAO}
               </span>
             </span>
           </Link>
-          <ul className="flex flex-wrap justify-end gap-x-4 gap-y-2 lg:gap-x-8" role="list">
-            {sections.map((item) => {
-              const isActive = pathname === "/" && activeSection === item.id;
-              const href = pathname === "/" ? `#${item.id}` : `/#${item.id}`;
-              return (
-                <li key={item.id}>
-                  <Link
-                    href={href}
-                    onClick={(e) => handleSectionClick(e, item.id)}
-                    className={`text-sm lg:text-base font-medium transition-all duration-300 ${
-                      isActive
-                        ? "text-graphite border-b-2 border-bronze pb-1 font-semibold"
-                        : "text-graphite/80 hover:text-bronze hover:border-b-2 hover:border-bronze/30 pb-1"
-                    }`}
-                    aria-current={isActive ? "page" : undefined}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
+
+          <div className="flex items-center gap-6">
+            <ul className="hidden md:flex flex-wrap justify-end gap-x-6 gap-y-2 lg:gap-x-8" role="list">
+              {sections.map((item) => {
+                const isActive = pathname === "/" && activeSection === item.id;
+                const href = pathname === "/" ? `#${item.id}` : `/#${item.id}`;
+                return (
+                  <li key={item.id}>
+                    <Link
+                      href={href}
+                      onClick={(e) => handleSectionClick(e, item.id)}
+                      className={`text-sm lg:text-base font-medium transition-all duration-300 ${
+                        isActive
+                          ? "text-graphite border-b-2 border-bronze pb-1 font-semibold"
+                          : "text-graphite/80 hover:text-bronze hover:border-b-2 hover:border-bronze/30 pb-1"
+                      }`}
+                      aria-current={isActive ? "page" : undefined}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-full bg-bronze px-5 py-2.5 text-sm font-semibold text-white shadow-bronze transition hover:bg-bronze-dark"
+            >
+              {CTA_LABEL}
+            </a>
+          </div>
         </div>
       </div>
     </nav>

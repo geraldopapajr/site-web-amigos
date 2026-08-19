@@ -1,19 +1,22 @@
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import ServicosSection from "./components/ServicosSection";
-import SobreSection from "./components/SobreSection";
+import QuemSouSection from "./components/QuemSouSection";
+import EspecialidadesSection from "./components/EspecialidadesSection";
+import MetodoSection from "./components/MetodoSection";
 import DepoimentosSection from "./components/DepoimentosSection";
 import ContatoSection from "./components/ContatoSection";
 import Footer from "./components/Footer";
 
+// Ordem dos blocos conforme o documento de copy final (Vincla Studio).
 export default function Home() {
   return (
     <>
       <Navbar />
       <main className="bg-cream">
         <Hero />
-        <ServicosSection />
-        <SobreSection />
+        <QuemSouSection />
+        <EspecialidadesSection />
+        <MetodoSection />
         <DepoimentosSection />
         <ContatoSection />
       </main>

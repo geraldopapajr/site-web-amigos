@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - fernanda # site da Fernanda Zanateli (serviço triarquide no Cloud Run)
   workflow_dispatch: # Permite execução manual
 
 env:

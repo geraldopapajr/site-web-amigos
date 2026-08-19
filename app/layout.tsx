@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
+import WhatsAppFloat from "./components/WhatsAppFloat";
+import { NOME } from "./siteConfig";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -14,22 +16,24 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
+const description =
+  "Recupere o prazer em comer e faça as pazes com o seu corpo através de um olhar humano, gentil e sem julgamentos. Nutrição comportamental com atendimento online.";
+
 export const metadata: Metadata = {
-  title: "Fernanda Zanatelli — Nutricionista",
-  description:
-    "Consultoria nutricional personalizada com base científica. Fernanda Zanatelli, nutricionista: reeducação alimentar, objetivos de saúde e acompanhamento humanizado.",
+  title: `${NOME} — Nutricionista`,
+  description,
   keywords: [
     "nutricionista",
-    "nutrição",
-    "consulta nutricional",
+    "nutrição comportamental",
+    "consulta nutricional online",
     "plano alimentar",
-    "Fernanda Zanatelli",
+    "reeducação alimentar",
+    NOME,
   ],
-  authors: [{ name: "Fernanda Zanatelli" }],
+  authors: [{ name: NOME }],
   openGraph: {
-    title: "Fernanda Zanatelli — Nutricionista",
-    description:
-      "Consultoria nutricional personalizada com foco em resultados sustentáveis e bem-estar.",
+    title: `${NOME} — Nutricionista`,
+    description,
     type: "website",
   },
 };
@@ -43,6 +47,7 @@ export default function RootLayout({
     <html lang="pt-BR">
       <body className={`${inter.variable} ${playfair.variable} antialiased`}>
         {children}
+        <WhatsAppFloat />
       </body>
     </html>
   );
