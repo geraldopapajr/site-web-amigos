@@ -23,11 +23,14 @@ export default function Portrait({
   const proporcao = circle ? "aspect-square" : "aspect-[4/5]";
   const src = circle ? FOTO_RETRATO : FOTO_HERO;
 
+  // Enquadramento: a foto é vertical (2:3) e o rosto fica no terço superior.
   const recorte = FOTO_PRECISA_TRATAMENTO
     ? circle
       ? "scale-[1.18] object-[50%_12%]"
       : "scale-[1.02] object-[50%_6%]"
-    : "object-center";
+    : circle
+      ? "object-[50%_14%]"
+      : "object-[50%_26%]";
 
   return (
     <figure className={`relative ${className}`}>
@@ -36,7 +39,7 @@ export default function Portrait({
         className={`pointer-events-none absolute -bottom-4 -right-4 h-full w-full border border-brand/35 ${radius}`}
         aria-hidden
       />
-      <div className={`relative overflow-hidden bg-paper-3 ${proporcao} ${radius}`}>
+      <div className={`relative overflow-hidden bg-paper-3 ring-1 ring-ink/8 ${proporcao} ${radius}`}>
         <Image
           src={src}
           alt={`${NOME}, nutricionista`}

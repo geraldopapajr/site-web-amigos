@@ -1,6 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="8" fill="#FDE790"/>
-  <path d="M16 25c0-5.2 1.7-8.9 5.6-11.6C21 18.5 19.2 22.3 16 25Z" fill="#6F4532"/>
-  <path d="M16 25c-3.2-2.7-5-6.5-5.6-11.6C14.3 16.1 16 19.8 16 25Z" fill="#A6C499"/>
-  <path d="M16 25V8" stroke="#593F28" stroke-width="1.6" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#FFFFFF"/>
+  <circle cx="32" cy="32" r="27" fill="none" stroke="#593F28" stroke-width="1.6"/>
+  <circle cx="32" cy="32" r="24.5" fill="none" stroke="#FDE790" stroke-width="1.6"/>
+  <text x="20" y="42" font-family="Georgia, 'Times New Roman', serif" font-size="30" fill="#FDE790">F</text>
+  <text x="34" y="42" font-family="Georgia, 'Times New Roman', serif" font-size="30" fill="#6F4532">Z</text>
 </svg>

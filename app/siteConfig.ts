@@ -18,22 +18,21 @@ export const CRN = "CRN 73044";
 export const CTA_LABEL = "Agende sua consulta";
 
 /**
- * ARQUIVOS DE MARCA — é só jogar o arquivo em `public/` e apontar aqui.
- *
- *   Logo:            public/logo.svg   (ou .png com fundo transparente)
- *   Foto do hero:    public/fernanda-hero.jpg      — vertical 4:5, >= 1200x1500
- *   Foto do retrato: public/fernanda-retrato.jpg   — quadrada, plano fechado
- *
- * Enquanto LOGO_SRC for null, o site usa a marca gráfica provisória.
- * As fotos abaixo apontam para a foto antiga até as novas chegarem.
+ * ARQUIVOS DE MARCA — ficam em `public/` e são apontados aqui.
+ * Para trocar qualquer um, basta substituir o arquivo ou mudar o caminho.
  */
-export const LOGO_SRC: string | null = null;
-export const FOTO_HERO = "/fernanda-zanatelli.jpeg";
-export const FOTO_RETRATO = "/fernanda-zanatelli.jpeg";
+// logo-marca.png = logo.png recortado no desenho e com máscara circular
+// (o arquivo original vem com fundo branco quadrado, que aparecia como
+// mancha nos fundos escuros). Script: scripts/mascara-logo.py
+export const LOGO_SRC: string | null = "/logo-marca.png";
+export const FOTO_HERO = "/fernanda-retrato.jpeg";
+export const FOTO_RETRATO = "/fernanda-retrato.jpeg";
 
-// Quando a foto for o ensaio profissional, deixe como false para desligar
-// a vinheta que hoje disfarça o fundo do ambiente da selfie.
-export const FOTO_PRECISA_TRATAMENTO = true;
+/**
+ * Só ligar se a foto for informal e precisar de recorte fechado + vinheta
+ * para disfarçar o ambiente. Com o ensaio profissional, fica desligado.
+ */
+export const FOTO_PRECISA_TRATAMENTO = false;
 
 /**
  * Bloco 5 — Depoimentos.
