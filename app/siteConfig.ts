@@ -36,8 +36,31 @@ export const FOTO_PRECISA_TRATAMENTO = false;
 
 /**
  * Bloco 5 — Depoimentos.
- * PENDÊNCIA: coletar/reescrever ao menos 3 depoimentos reais com a Fernanda
- * antes de publicar. Enquanto a lista estiver vazia, a seção não é renderizada
- * (não publicamos depoimentos inventados no site de uma profissional real).
+ * Depoimentos reais, enviados pela Fernanda, publicados na íntegra e sem
+ * reescrita — só o sobrenome foi abreviado. A seção não é renderizada
+ * enquanto esta lista estiver vazia.
+ * Use uma linha em branco para separar parágrafos dentro de um depoimento.
+ * O PRIMEIRO da lista aparece em destaque, ocupando a largura toda.
  */
-export const DEPOIMENTOS: { texto: string; nome: string; detalhe?: string }[] = [];
+export const DEPOIMENTOS: { texto: string; nome: string; detalhe?: string }[] = [
+  {
+    texto:
+      "Minha experiência com a nutricionista Fernanda Zanateli, foi excelente! Desde o início, ela se preocupou em entender o meu dia a dia, a minha rotina e as minhas necessidades, adaptando tudo de forma personalizada e realista para que eu conseguisse alcançar o resultado que buscava.\n\nE, para mim, o mais importante foi o acompanhamento durante todo o processo. Sempre que surgia alguma dúvida ou dificuldade, ela estava pronta para me orientar, ajudar e, principalmente, me motivar a continuar.\n\nFoi um acompanhamento acolhedor, próximo e muito personalizado. Me senti realmente cuidada e incentivada em cada etapa. Sou muito grata por todo o apoio e por tornar esse processo mais leve e possível!",
+    nome: "Samira A.",
+  },
+  {
+    texto:
+      "Fernanda é uma nutricionista muito atenciosa e dedicada. Uma profissional que escuta todas as nossas necessidades e aplica da melhor forma em nosso tratamento. Recebi uma dieta personalizada que melhorou minha qualidade de vida e relação com a comida. Agradeço muito por ter como aliada uma profissional com um conhecimento técnico valioso e ao mesmo tempo um carinho enorme por nós e atenção ao que preciso e gosto.",
+    nome: "Gabriela S.",
+  },
+  {
+    texto:
+      "Recomendo muito!! Foi a primeira vez que eu passei em nutricionista e ela mudou muito minha forma de ver a comida e me alimentar. Perdi o medo de comer, me senti orientada, acompanhada e num espaço que me acolhe e não julga! Excelente profissional",
+    nome: "Carolina C.",
+  },
+  {
+    texto:
+      "Passei em consulta com a Fernanda no mês passado, atendimento super direcionado, leve e que me fizeram mudar radicalmente meus hábitos de consumo e rotina esportiva. Pensei que isso era impossível, entretanto, foi possível ajustar tudo com um ótimo acompanhamento",
+    nome: "Fabrizzio S.",
+  },
+];

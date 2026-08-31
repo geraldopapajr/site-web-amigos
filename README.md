@@ -10,7 +10,8 @@ Minhas especialidades, Meu método, Depoimentos e Contato.
 ## Onde mexer no conteúdo
 
 `app/siteConfig.ts` concentra o que muda com frequência: link do WhatsApp
-comercial, Instagram, nome, CRN, rótulo do CTA e a lista de depoimentos.
+comercial, Instagram, nome, CRN, rótulo do CTA e a lista de depoimentos (o
+primeiro da lista aparece em destaque; a seção some se a lista ficar vazia).
 
 Os textos de cada bloco ficam no componente correspondente em
 `app/components/`, e a página "Sobre mim" completa em `app/sobre/page.tsx`.
@@ -47,8 +48,6 @@ substituir os arquivos e apontar `LOGO_SRC`.
 
 ## Pendências de conteúdo
 
-- Ao menos 3 depoimentos reais — o Bloco 5 fica oculto enquanto `DEPOIMENTOS`
-  estiver vazio, para não publicar depoimento inventado
 - Uma segunda foto, mais aberta, para o hero (hoje hero e retrato usam a mesma)
 - Ícones/ilustrações das especialidades no estilo da identidade
 - Imagem de Open Graph (compartilhamento em WhatsApp e redes)
