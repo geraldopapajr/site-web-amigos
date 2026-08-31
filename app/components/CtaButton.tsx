@@ -11,7 +11,7 @@ export default function CtaButton({
   className = "",
 }: {
   size?: "sm" | "md" | "lg";
-  variant?: "solid" | "outline" | "cream";
+  variant?: "solid" | "outline" | "paper";
   className?: string;
 }) {
   const sizes = {
@@ -20,9 +20,9 @@ export default function CtaButton({
     lg: "px-9 py-4 text-base",
   };
   const variants = {
-    solid: "bg-clay text-cream shadow-cta hover:bg-clay-dark",
-    outline: "border border-ink/15 bg-transparent text-ink hover:border-clay hover:text-clay-dark",
-    cream: "bg-cream text-ink hover:bg-white",
+    solid: "bg-brand text-paper shadow-cta hover:bg-brand-dark",
+    outline: "border border-ink/15 bg-transparent text-ink hover:border-brand hover:text-brand-dark",
+    paper: "bg-paper text-ink hover:bg-white",
   };
 
   return (

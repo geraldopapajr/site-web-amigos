@@ -14,19 +14,19 @@ export default function Footer() {
   const ano = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-cream/10 bg-olive-dark">
+    <footer className="border-t border-paper/10 bg-brand-dark">
       <div className="container-page py-16">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr]">
           <div>
-            <Logo tone="cream" />
-            <p className="mt-6 max-w-[34ch] text-[15px] leading-relaxed text-cream/60">
+            <Logo tone="paper" />
+            <p className="mt-6 max-w-[34ch] text-[15px] leading-relaxed text-paper/60">
               Nutrição comportamental com escuta ativa e acolhimento. Atendimento online, por
               videochamada.
             </p>
           </div>
 
           <nav aria-label="Navegação do rodapé">
-            <h2 className="font-sans text-[11px] font-semibold uppercase tracking-eyebrow text-cream/45">
+            <h2 className="font-sans text-[11px] font-semibold uppercase tracking-eyebrow text-paper/45">
               Navegação
             </h2>
             <ul className="mt-5 space-y-3" role="list">
@@ -34,7 +34,7 @@ export default function Footer() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-[15px] text-cream/75 transition-colors hover:text-cream"
+                    className="text-[15px] text-paper/75 transition-colors hover:text-paper"
                   >
                     {item.label}
                   </Link>
@@ -44,7 +44,7 @@ export default function Footer() {
           </nav>
 
           <div>
-            <h2 className="font-sans text-[11px] font-semibold uppercase tracking-eyebrow text-cream/45">
+            <h2 className="font-sans text-[11px] font-semibold uppercase tracking-eyebrow text-paper/45">
               Contato
             </h2>
             <ul className="mt-5 space-y-3" role="list">
@@ -53,7 +53,7 @@ export default function Footer() {
                   href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[15px] text-cream/75 transition-colors hover:text-cream"
+                  className="text-[15px] text-paper/75 transition-colors hover:text-paper"
                 >
                   {CTA_LABEL}
                 </a>
@@ -63,7 +63,7 @@ export default function Footer() {
                   href={INSTAGRAM_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[15px] text-cream/75 transition-colors hover:text-cream"
+                  className="text-[15px] text-paper/75 transition-colors hover:text-paper"
                 >
                   Instagram
                 </a>
@@ -72,7 +72,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-3 border-t border-cream/10 pt-8 text-[13px] text-cream/50 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-14 flex flex-col gap-3 border-t border-paper/10 pt-8 text-[13px] text-paper/50 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {ano} {NOME} · Nutricionista
           </p>

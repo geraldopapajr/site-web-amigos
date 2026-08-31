@@ -75,7 +75,7 @@ export default function Navbar() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-gentle ${
         scrolled || menuAberto
-          ? "border-b border-ink/8 bg-cream/90 backdrop-blur-md"
+          ? "border-b border-ink/8 bg-paper/90 backdrop-blur-md"
           : "border-b border-transparent bg-transparent"
       }`}
     >
@@ -102,10 +102,10 @@ export default function Navbar() {
                   <Link
                     href={hrefDe(item.id)}
                     aria-current={isActive ? "true" : undefined}
-                    className={`relative font-sans text-[14px] font-medium transition-colors duration-300 after:absolute after:-bottom-1.5 after:left-0 after:h-px after:bg-clay after:transition-all after:duration-300 after:ease-gentle ${
+                    className={`relative font-sans text-[14px] font-medium transition-colors duration-300 after:absolute after:-bottom-1.5 after:left-0 after:h-px after:bg-brand after:transition-all after:duration-300 after:ease-gentle ${
                       isActive
                         ? "text-ink after:w-full"
-                        : "text-ink-soft after:w-0 hover:text-clay-dark hover:after:w-full"
+                        : "text-ink-soft after:w-0 hover:text-brand-dark hover:after:w-full"
                     }`}
                   >
                     {item.label}
@@ -120,7 +120,7 @@ export default function Navbar() {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden rounded-full bg-clay px-5 py-2.5 font-sans text-[13px] font-semibold text-cream shadow-cta transition-colors duration-300 hover:bg-clay-dark sm:inline-flex"
+              className="hidden rounded-full bg-brand px-5 py-2.5 font-sans text-[13px] font-semibold text-paper shadow-cta transition-colors duration-300 hover:bg-brand-dark sm:inline-flex"
             >
               {CTA_LABEL}
             </a>
@@ -128,7 +128,7 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => setMenuAberto((v) => !v)}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-ink/12 text-ink transition-colors hover:border-clay hover:text-clay md:hidden"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-ink/12 text-ink transition-colors hover:border-brand hover:text-brand md:hidden"
               aria-expanded={menuAberto}
               aria-controls="menu-mobile"
               aria-label={menuAberto ? "Fechar menu" : "Abrir menu"}
@@ -159,7 +159,7 @@ export default function Navbar() {
       <div
         id="menu-mobile"
         hidden={!menuAberto}
-        className="border-t border-ink/8 bg-cream/95 backdrop-blur-md md:hidden"
+        className="border-t border-ink/8 bg-paper/95 backdrop-blur-md md:hidden"
       >
         <ul className="container-page flex flex-col py-4" role="list">
           {sections.map((item) => (
@@ -167,7 +167,7 @@ export default function Navbar() {
               <Link
                 href={hrefDe(item.id)}
                 onClick={() => setMenuAberto(false)}
-                className="block py-4 font-display text-xl text-ink transition-colors hover:text-clay"
+                className="block py-4 font-display text-xl text-ink transition-colors hover:text-brand"
               >
                 {item.label}
               </Link>
@@ -179,7 +179,7 @@ export default function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setMenuAberto(false)}
-              className="flex w-full items-center justify-center rounded-full bg-clay px-6 py-3.5 font-sans text-[15px] font-semibold text-cream"
+              className="flex w-full items-center justify-center rounded-full bg-brand px-6 py-3.5 font-sans text-[15px] font-semibold text-paper"
             >
               {CTA_LABEL}
             </a>

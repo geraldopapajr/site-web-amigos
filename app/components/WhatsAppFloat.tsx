@@ -12,7 +12,7 @@ export default function WhatsAppFloat() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`${CTA_LABEL} pelo WhatsApp`}
-      className="group fixed bottom-5 right-5 z-[60] flex items-center gap-0 overflow-hidden rounded-full bg-[#25D366] pl-[14px] pr-[14px] text-cream shadow-lift transition-all duration-500 ease-gentle hover:bg-[#1FB855] sm:bottom-8 sm:right-8"
+      className="group fixed bottom-5 right-5 z-[60] flex items-center gap-0 overflow-hidden rounded-full bg-[#25D366] pl-[14px] pr-[14px] text-paper shadow-lift transition-all duration-500 ease-gentle hover:bg-[#1FB855] sm:bottom-8 sm:right-8"
     >
       <span className="flex h-12 w-8 items-center justify-center sm:h-13">
         <svg viewBox="0 0 24 24" className="h-7 w-7" fill="currentColor" aria-hidden>

@@ -24,7 +24,7 @@ const passos = [
 /** Bloco 4 — Meu método de trabalho. */
 export default function MetodoSection() {
   return (
-    <section id="metodo" className="relative bg-cream py-24 sm:py-28 lg:py-36">
+    <section id="metodo" className="relative bg-paper py-24 sm:py-28 lg:py-36">
       <div className="container-page">
         <SectionHeading eyebrow="Como funciona" title="Meu método de trabalho" align="center" />
 
@@ -34,15 +34,15 @@ export default function MetodoSection() {
               as="li"
               key={passo.numero}
               delay={index * 110}
-              className="relative lg:after:absolute lg:after:left-9 lg:after:top-[13px] lg:after:h-px lg:after:w-[calc(100%+10px)] lg:after:bg-clay/25 lg:last:after:hidden"
+              className="relative lg:after:absolute lg:after:left-9 lg:after:top-[13px] lg:after:h-px lg:after:w-[calc(100%+10px)] lg:after:bg-brand/25 lg:last:after:hidden"
             >
               <span
-                className="relative z-10 flex h-7 w-7 items-center justify-center rounded-full border border-clay/35 bg-cream"
+                className="relative z-10 flex h-7 w-7 items-center justify-center rounded-full border border-brand/35 bg-paper"
                 aria-hidden
               >
-                <span className="h-2 w-2 rounded-full bg-clay" />
+                <span className="h-2 w-2 rounded-full bg-brand" />
               </span>
-              <p className="mt-6 font-sans text-[11px] font-semibold uppercase tracking-eyebrow text-clay">
+              <p className="mt-6 font-sans text-[11px] font-semibold uppercase tracking-eyebrow text-brand">
                 Passo {passo.numero}
               </p>
               <h3 className="mt-3 font-display text-[22px] font-semibold leading-snug tracking-[-0.01em] text-ink">
@@ -56,10 +56,10 @@ export default function MetodoSection() {
         </ol>
 
         <Reveal className="mt-20">
-          <div className="mx-auto flex max-w-3xl flex-col items-center gap-8 rounded-3xl border border-olive/12 bg-olive-tint/70 px-8 py-10 text-center">
+          <div className="mx-auto flex max-w-3xl flex-col items-center gap-8 rounded-3xl border border-sage/12 bg-sage-tint/70 px-8 py-10 text-center">
             <svg
               viewBox="0 0 24 24"
-              className="h-7 w-7 text-olive"
+              className="h-7 w-7 text-sage"
               fill="none"
               stroke="currentColor"
               strokeWidth="1.5"

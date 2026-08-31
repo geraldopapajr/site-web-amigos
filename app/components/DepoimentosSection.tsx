@@ -24,18 +24,18 @@ export default function DepoimentosSection() {
   const depoimento = DEPOIMENTOS[atual];
 
   return (
-    <section id="depoimentos" className="relative bg-cream-100 py-24 sm:py-28 lg:py-36">
+    <section id="depoimentos" className="relative bg-paper-2 py-24 sm:py-28 lg:py-36">
       <div className="container-page">
         <SectionHeading eyebrow="Confiança" title="O que dizem minhas pacientes" align="center" />
 
         <Reveal className="mx-auto mt-16 max-w-3xl">
           <div
-            className="relative rounded-[2rem] border border-ink/8 bg-cream p-9 shadow-soft sm:p-12"
+            className="relative rounded-[2rem] border border-ink/8 bg-paper p-9 shadow-soft sm:p-12"
             role="group"
             aria-roledescription="carrossel"
             aria-label="Depoimentos de pacientes"
           >
-            <svg viewBox="0 0 32 24" className="h-6 w-8 text-ocre" fill="currentColor" aria-hidden>
+            <svg viewBox="0 0 32 24" className="h-6 w-8 text-sun" fill="currentColor" aria-hidden>
               <path d="M13 24V13.4C13 6.5 17.2 1.7 24 0l1.6 4C21.4 5.5 19 8.2 19 11.3h4.3V24H13Zm-13 0V13.4C0 6.5 4.2 1.7 11 0l1.6 4C8.4 5.5 6 8.2 6 11.3h4.3V24H0Z" />
             </svg>
 
@@ -68,7 +68,7 @@ export default function DepoimentosSection() {
                       aria-label={`Depoimento ${i + 1} de ${total}`}
                       onClick={() => setAtual(i)}
                       className={`h-1.5 rounded-full transition-all duration-300 ease-gentle ${
-                        i === atual ? "w-8 bg-clay" : "w-1.5 bg-ink/20 hover:bg-clay/50"
+                        i === atual ? "w-8 bg-brand" : "w-1.5 bg-ink/20 hover:bg-brand/50"
                       }`}
                     />
                   ))}
@@ -78,7 +78,7 @@ export default function DepoimentosSection() {
                     type="button"
                     onClick={() => ir(atual - 1)}
                     aria-label="Depoimento anterior"
-                    className="flex h-10 w-10 items-center justify-center rounded-full border border-ink/12 text-ink-soft transition-colors hover:border-clay hover:text-clay"
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-ink/12 text-ink-soft transition-colors hover:border-brand hover:text-brand"
                   >
                     <span aria-hidden>←</span>
                   </button>
@@ -86,7 +86,7 @@ export default function DepoimentosSection() {
                     type="button"
                     onClick={() => ir(atual + 1)}
                     aria-label="Próximo depoimento"
-                    className="flex h-10 w-10 items-center justify-center rounded-full border border-ink/12 text-ink-soft transition-colors hover:border-clay hover:text-clay"
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-ink/12 text-ink-soft transition-colors hover:border-brand hover:text-brand"
                   >
                     <span aria-hidden>→</span>
                   </button>

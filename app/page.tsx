@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="bg-cream">
+      <main className="bg-paper">
         <Hero />
         <QuemSouSection />
         <EspecialidadesSection />

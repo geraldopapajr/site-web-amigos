@@ -7,7 +7,7 @@ import { CRN, NOME } from "../siteConfig";
 /** Bloco 2 — Quem sou eu (resumo). A versão integral vive em /sobre. */
 export default function QuemSouSection() {
   return (
-    <section id="sobre" className="relative bg-cream py-24 sm:py-28 lg:py-32">
+    <section id="sobre" className="relative bg-sage-tint py-24 sm:py-28 lg:py-32">
       <div className="container-page">
         <Reveal>
           <div className="relative overflow-hidden rounded-[2rem] border border-ink/8 bg-white shadow-soft">
@@ -21,7 +21,7 @@ export default function QuemSouSection() {
                 <blockquote className="mt-7">
                   <svg
                     viewBox="0 0 32 24"
-                    className="h-6 w-8 text-ocre"
+                    className="h-6 w-8 text-sun"
                     fill="currentColor"
                     aria-hidden
                   >
@@ -42,7 +42,7 @@ export default function QuemSouSection() {
                   <CtaButton />
                   <Link
                     href="/sobre"
-                    className="group inline-flex items-center gap-2 font-sans text-[15px] font-semibold text-clay-dark transition-colors hover:text-clay"
+                    className="group inline-flex items-center gap-2 font-sans text-[15px] font-semibold text-brand-dark transition-colors hover:text-brand"
                   >
                     Saiba mais sobre mim
                     <span className="transition-transform duration-300 ease-gentle group-hover:translate-x-1" aria-hidden>

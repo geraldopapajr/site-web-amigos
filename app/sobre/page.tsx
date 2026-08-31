@@ -19,9 +19,9 @@ export default function Sobre() {
       <Navbar />
 
       <main>
-        <section className="textured relative overflow-hidden bg-cream pt-32 pb-20 sm:pt-40 lg:pt-44 lg:pb-28">
+        <section className="textured relative overflow-hidden bg-paper pt-32 pb-20 sm:pt-40 lg:pt-44 lg:pb-28">
           <div
-            className="pointer-events-none absolute -top-40 left-[-10%] h-[40rem] w-[40rem] rounded-full bg-[radial-gradient(circle_at_center,rgba(201,164,74,0.15),transparent_65%)]"
+            className="pointer-events-none absolute -top-40 left-[-10%] h-[40rem] w-[40rem] rounded-full bg-[radial-gradient(circle_at_center,rgba(253,231,144,0.35),transparent_65%)]"
             aria-hidden
           />
 
@@ -39,7 +39,7 @@ export default function Sobre() {
                 </Reveal>
 
                 <Reveal delay={100} className="prose-fz mt-12 max-w-measure space-y-6">
-                  <p className="first-letter:float-left first-letter:mr-3 first-letter:font-display first-letter:text-[3.6rem] first-letter:font-semibold first-letter:leading-[0.82] first-letter:text-clay">
+                  <p className="first-letter:float-left first-letter:mr-3 first-letter:font-display first-letter:text-[3.6rem] first-letter:font-semibold first-letter:leading-[0.82] first-letter:text-brand">
                     Sou <strong>{NOME}</strong>, nutricionista formada há 05 anos pela Universidade de
                     Taubaté e pós-graduada em Comportamento Alimentar. Acredito que alimentação saudável
                     precisa ser possível no mundo real, com trabalho, família, imprevistos, não apenas em
@@ -67,7 +67,7 @@ export default function Sobre() {
                     <CtaButton size="lg" />
                     <Link
                       href="/"
-                      className="font-sans text-[15px] font-medium text-ink-soft underline decoration-ink/20 underline-offset-[6px] transition-colors hover:text-clay hover:decoration-clay"
+                      className="font-sans text-[15px] font-medium text-ink-soft underline decoration-ink/20 underline-offset-[6px] transition-colors hover:text-brand hover:decoration-brand"
                     >
                       Voltar para a página inicial
                     </Link>
@@ -83,7 +83,7 @@ export default function Sobre() {
                     className="mx-auto max-w-[340px] lg:mr-0"
                     sizes="(max-width: 1024px) 70vw, 340px"
                   />
-                  <p className="mt-10 border-l border-ocre/60 pl-5 font-display text-[19px] leading-[1.5] tracking-[-0.01em] text-ink-soft">
+                  <p className="mt-10 border-l border-sun/60 pl-5 font-display text-[19px] leading-[1.5] tracking-[-0.01em] text-ink-soft">
                     Mais do que prescrever, meu papel é caminhar ao seu lado.
                   </p>
                 </div>

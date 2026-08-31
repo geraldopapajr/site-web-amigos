@@ -4,8 +4,11 @@ import SectionHeading from "./SectionHeading";
 
 /**
  * Bloco 3 — Minhas especialidades.
- * PENDÊNCIA: os ícones abaixo são de linha, desenhados para o sistema atual.
- * Trocar por ícones/ilustrações da identidade visual quando a Fase 1 fechar.
+ * São 7 itens: em grade de caixas sobrava sempre um card órfão na última
+ * linha, então viraram uma lista editorial de duas colunas — a quantidade
+ * ímpar deixa de aparecer como buraco, e nada fica escondido num carrossel.
+ *
+ * PENDÊNCIA: ícones de linha provisórios; trocar pelos da identidade visual.
  */
 const especialidades: { titulo: string; icone: React.ReactNode }[] = [
   {
@@ -46,7 +49,7 @@ const especialidades: { titulo: string; icone: React.ReactNode }[] = [
     ),
   },
   {
-    titulo: "Emagrecimento com base comportamental",
+    titulo: "Emagrecimento",
     icone: (
       <>
         <path d="M12 20.5c-4 0-7-2.8-7-6.6 0-2.6 1.6-4.6 3-6.2C9.5 5.9 10.6 4.4 11 2.5c2.8 1.6 4.4 3.8 4.4 6 0 1.2-.5 2.2-1.2 3 .9.2 1.7-.2 2.4-1 1 1.3 1.4 2.7 1.4 4 0 3.8-3 6-6 6Z" />
@@ -75,7 +78,7 @@ const especialidades: { titulo: string; icone: React.ReactNode }[] = [
 
 export default function EspecialidadesSection() {
   return (
-    <section id="especialidades" className="relative bg-cream-100 py-24 sm:py-28 lg:py-36">
+    <section id="especialidades" className="relative bg-paper-2 py-24 sm:py-28 lg:py-36">
       <div className="container-page">
         <SectionHeading
           eyebrow="Como posso te ajudar"
@@ -83,19 +86,22 @@ export default function EspecialidadesSection() {
           lead="A nutrição comportamental é a abordagem principal dos meus atendimentos, com escuta ativa e acolhimento para que seus objetivos sejam alcançados levando em consideração sua realidade e o significado que a comida tem em sua vida."
         />
 
-        <ul className="mt-16 flex flex-wrap justify-center gap-5" role="list">
+        <ul
+          className="mt-16 grid border-b border-ink/10 sm:grid-cols-2 sm:gap-x-14 lg:gap-x-24"
+          role="list"
+        >
           {especialidades.map((item, index) => (
             <Reveal
               as="li"
               key={item.titulo}
-              delay={index * 55}
-              className="flex basis-full sm:basis-[calc(50%-0.625rem)] lg:basis-[calc(33.333%-0.834rem)]"
+              delay={index * 60}
+              className="group border-t border-ink/10"
             >
-              <article className="group flex w-full flex-col gap-6 rounded-2xl border border-ink/10 bg-white p-7 transition-all duration-500 ease-gentle hover:-translate-y-1 hover:border-clay/35 hover:shadow-lift">
-                <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-clay/15 bg-clay-tint text-clay-dark transition-colors duration-500 group-hover:border-clay group-hover:bg-clay group-hover:text-cream">
+              <div className="flex items-center gap-5 py-7 transition-transform duration-500 ease-gentle group-hover:translate-x-1">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-sun/40 text-brand-dark transition-colors duration-500 group-hover:bg-brand group-hover:text-paper">
                   <svg
                     viewBox="0 0 24 24"
-                    className="h-6 w-6"
+                    className="h-[22px] w-[22px]"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="1.5"
@@ -106,10 +112,10 @@ export default function EspecialidadesSection() {
                     {item.icone}
                   </svg>
                 </span>
-                <h3 className="font-display text-[21px] font-semibold leading-snug tracking-[-0.01em] text-ink">
+                <h3 className="font-display text-[19px] font-semibold leading-snug tracking-[-0.01em] text-ink sm:text-[21px]">
                   {item.titulo}
                 </h3>
-              </article>
+              </div>
             </Reveal>
           ))}
         </ul>
