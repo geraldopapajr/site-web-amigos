@@ -32,7 +32,16 @@ export const metadata: Metadata = {
     NOME,
   ],
   authors: [{ name: NOME }],
-  icons: { icon: "/favicon.svg" },
+  // Icones gerados de public/logo.png por scripts/gera-favicon.py
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "16x16 32x32 48x48" },
+      { url: "/icon-32.png", type: "image/png", sizes: "32x32" },
+      { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
+      { url: "/icon-512.png", type: "image/png", sizes: "512x512" },
+    ],
+    apple: { url: "/apple-touch-icon.png", sizes: "180x180" },
+  },
   openGraph: {
     title: `${NOME} — Nutricionista`,
     description,

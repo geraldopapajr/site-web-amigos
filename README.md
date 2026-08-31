@@ -17,18 +17,42 @@ Os textos de cada bloco ficam no componente correspondente em
 
 ## Identidade visual
 
-Sistema "Terra & Oliva": paleta (creme, terracota, oliva, ocre) em
-`tailwind.config.ts`, tipografia (Fraunces + DM Sans) em `app/layout.tsx`.
-Trocar a identidade da marca significa mexer nesses dois arquivos.
+Sistema "Terra & Oliva": paleta oficial (`#6f4532`, `#593f28`, `#fde790`,
+`#a6c499`, `#000000`, `#ffffff`) em `tailwind.config.ts`, tipografia
+(Fraunces + DM Sans) em `app/layout.tsx`. Trocar a identidade da marca
+significa mexer nesses dois arquivos.
+
+### Arquivos de marca
+
+Ficam em `public/` e são apontados por `app/siteConfig.ts`:
+
+| arquivo | uso |
+| --- | --- |
+| `logo.png` | logo oficial entregue pela cliente (fonte, não usado direto) |
+| `logo-marca.png` | logo usado no site — recortado e com máscara circular |
+| `fernanda-retrato.jpeg` | foto do hero e do bloco "Quem sou eu" |
+| `favicon.ico`, `icon-*.png`, `apple-touch-icon.png` | ícone da aba e do atalho |
+
+Os derivados são gerados a partir do `logo.png`, que vem com fundo branco
+chapado (viraria mancha quadrada nos fundos escuros) e com aneis finos mais o
+texto "CRN 3 73044", ilegíveis em 16-32 px:
+
+```bash
+python3 scripts/mascara-logo.py   # logo-marca.png (máscara circular)
+python3 scripts/gera-favicon.py   # ícones, recortados só no monograma F.Z
+```
+
+Se algum dia chegar o logo em SVG ou PNG com transparência real, basta
+substituir os arquivos e apontar `LOGO_SRC`.
 
 ## Pendências de conteúdo
 
-- Ensaio fotográfico profissional — a foto atual é informal e está com recorte
-  fechado e vinheta para disfarçar o ambiente (ver `app/components/Portrait.tsx`)
 - Ao menos 3 depoimentos reais — o Bloco 5 fica oculto enquanto `DEPOIMENTOS`
   estiver vazio, para não publicar depoimento inventado
-- Logo oficial (hoje há uma marca gráfica provisória em `app/components/Logo.tsx`)
+- Uma segunda foto, mais aberta, para o hero (hoje hero e retrato usam a mesma)
 - Ícones/ilustrações das especialidades no estilo da identidade
+- Imagem de Open Graph (compartilhamento em WhatsApp e redes)
+- Definir se o site escreve "CRN 73044" (copy aprovada) ou "CRN-3 73044" (logo)
 
 ## Desenvolvimento
 
