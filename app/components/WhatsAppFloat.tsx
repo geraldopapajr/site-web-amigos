@@ -9,6 +9,7 @@ export default function WhatsAppFloat() {
   return (
     <a
       href={WHATSAPP_URL}
+      data-whatsapp-float
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`${CTA_LABEL} pelo WhatsApp`}

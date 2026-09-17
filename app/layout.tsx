@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { DM_Sans, Fraunces } from "next/font/google";
 import "./globals.css";
+import AnalyticsEvents from "./components/AnalyticsEvents";
+import GoogleAnalytics from "./components/GoogleAnalytics";
 import WhatsAppFloat from "./components/WhatsAppFloat";
 import { NOME } from "./siteConfig";
 
@@ -58,6 +60,8 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={`${sans.variable} ${display.variable}`}>
+        <GoogleAnalytics />
+        <AnalyticsEvents />
         {children}
         <WhatsAppFloat />
       </body>

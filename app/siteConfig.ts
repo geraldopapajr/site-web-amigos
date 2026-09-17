@@ -64,3 +64,10 @@ export const DEPOIMENTOS: { texto: string; nome: string; detalhe?: string }[] = 
     nome: "Fabrizzio S.",
   },
 ];
+
+/**
+ * Google Analytics 4 — ID de medição fornecido pela agência de marketing.
+ * O script é carregado no layout raiz (app/layout.tsx), ou seja, em todas as
+ * páginas do site. Deixe como null para desligar a medição.
+ */
+export const GA_MEASUREMENT_ID: string | null = "G-NSFCX8ZWWM";
